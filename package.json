@@ -1,6 +1,6 @@
 {
-  "name": "boilerplate-fullstack",
-  "version": "2.0.0",
+  "name": "ropu",
+  "version": "0.0.1",
   "main": "server/index.js",
   "license": "MIT",
   "keywords": [
