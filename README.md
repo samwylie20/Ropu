@@ -1,5 +1,4 @@
 # Ropu
 
-## Getting Started
-
 TODO
+
