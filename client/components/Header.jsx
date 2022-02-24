@@ -1,38 +1,54 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Flex } from '@chakra-ui/react'
-import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon } from '@heroicons/react/solid'
-
+import { Box, Button, Flex, HStack } from '@chakra-ui/react'
+import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon, TrendingUpIcon } from '@heroicons/react/solid'
 import Logo from './Logo'
 import NewPost from './posts/newPost'
-
-// Create header component with logo, navlinks and New post button #4
-// Logo, Top, Jobs, Code, Events, New post
 
 function Header () {
   return (
     <>
       <Box padding='16px'>
-        <Flex direction='right' justify='space-around'>
-          <Box>
-            <Logo />
-          </Box>
-          <nav>
-            < ArrowSmUpIcon />
-            <Link to='/'>Top</Link>
-          </nav>
-          <nav>
-            <LinkIcon />
-            <Link to='/jobs'>Jobs</Link>
-          </nav>
-          <nav>
-            < CodeIcon />
-            <Link to='/code'>Code</Link>
-          </nav>
-          <nav>
-            <OfficeBuildingIcon />
-            <Link to='/events'>Events</Link>
-          </nav>
+        <Flex direction='left' justify='space-around'>
+          <HStack spacing='12'>
+            <Box>
+              <Logo />
+            </Box>
+            <HStack spacing='2' align='left'>
+              <nav>
+                <Button background='none'>
+                  <TrendingUpIcon height='24px' />
+                  <Box marginLeft='2'>
+                    <Link to='/'>Top</Link>
+                  </Box>
+                </Button>
+              </nav>
+              <nav>
+                <Button background='none'>
+                  <OfficeBuildingIcon height='24px'/>
+                  <Box marginLeft='2'>
+                    <Link to='/jobs'>Jobs</Link>
+                  </Box>
+                </Button>
+              </nav>
+              <nav>
+                <Button background='none'>
+                  <CodeIcon height='24px'/>
+                  <Box marginLeft='2'>
+                    <Link to='/code'>Code</Link>
+                  </Box>
+                </Button>
+              </nav>
+              <nav>
+                <Button background='none'>
+                  <OfficeBuildingIcon height='24px'/>
+                  <Box marginLeft='2'>
+                    <Link to='/events'>Events</Link>
+                  </Box>
+                </Button>
+              </nav>
+            </HStack>
+          </HStack>
           <NewPost />
         </Flex>
       </Box>
