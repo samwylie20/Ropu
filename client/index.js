@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import store from './store'
 import { extendTheme, ChakraProvider } from '@chakra-ui/react'
 import App from './components/App'
+import { BrowserRouter } from 'react-router-dom'
 
 // Can change these colors later
 const colors = {
@@ -18,11 +19,13 @@ const theme = extendTheme({ colors })
 
 document.addEventListener('DOMContentLoaded', () => {
   render(
-    <Provider store={store}>
-      <ChakraProvider theme={theme}>
-        <App />
-      </ChakraProvider>
-    </Provider>,
+    <BrowserRouter>
+      <Provider store={store}>
+        <ChakraProvider theme={theme}>
+          <App />
+        </ChakraProvider>
+      </Provider>
+    </BrowserRouter>,
     document.getElementById('app')
   )
 })

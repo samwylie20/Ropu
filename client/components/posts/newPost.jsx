@@ -2,7 +2,7 @@ import React, {
   useRef,
   useState
 } from 'react'
-import { InputGroup, Switch, Textarea, InputLeftElement, Select, Button, Modal, ModalOverlay, ModalHeader, ModalContent, ModalCloseButton, FormControl, ModalBody, FormLabel, Input, ModalFooter, useDisclosure, InputAddon } from '@chakra-ui/react'
+import { InputGroup, Switch, Textarea, InputLeftElement, Select, Button, Modal, ModalOverlay, ModalHeader, ModalContent, ModalCloseButton, FormControl, ModalBody, FormLabel, Input, ModalFooter, useDisclosure } from '@chakra-ui/react'
 import { LinkIcon } from '@chakra-ui/icons'
 
 export default function NewPost () {
@@ -42,6 +42,7 @@ export default function NewPost () {
                 <option value='link'>Link</option>
                 <option value='job'>Job</option>
                 <option value='code'>Code</option>
+                <option value='events'>Events</option>
               </Select>
             </FormControl>
             <FormControl mt={4}>
