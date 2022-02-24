@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Box, Text, Stack, HStack, Link, LinkBox, LinkOverlay } from '@chakra-ui/react'
-import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon } from '@heroicons/react/solid'
+import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon, CalendarIcon } from '@heroicons/react/solid'
 
 export default function postItem ({ index, votes, title, author, type, authorCohort, postCreated, commentsNum }) {
   function handleUpVote (e) {
@@ -27,6 +27,7 @@ export default function postItem ({ index, votes, title, author, type, authorCoh
             {type === 'link' && <LinkIcon height='24px' />}
             {type === 'job' && <OfficeBuildingIcon height='24px' />}
             {type === 'code' && <CodeIcon height='24px' />}
+            {type === 'events' && <CalendarIcon height='24px' />}
           </Box>
           <Stack>
             <LinkOverlay href='#posturl' target="_blank">
