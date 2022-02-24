@@ -1,22 +1,14 @@
 import React from 'react'
-import { extendTheme, ChakraProvider } from '@chakra-ui/react'
 
-// Can change these colors later
-const colors = {
-  brand: {
-    900: '#E94D3E', // STANDARD
-    800: '#C24034', // DARKER
-    700: '#F7958D', // LIGHTER
-  },
-}
+import { Box } from '@chakra-ui/react'
 
-const theme = extendTheme({ colors })
+import Post from './posts/postItem'
 
 function App () {
   return (
-    <ChakraProvider theme={theme}>
-      <App />
-    </ChakraProvider>
+    <Box padding="24">
+      <Post index='1' votes="100" title="Things you notice when you quit the news (2016)" author='Ryan' authorCohort='Harakeke' postCreated='23/2/2022'  commentsNum="12"/>
+    </Box>
   )
 }
 
