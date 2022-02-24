@@ -38,6 +38,7 @@
     ]
   },
   "dependencies": {
+    "@supabase/supabase-js": "^1.30.6",
     "express": "^4.17.1",
     "knex": "^0.21.12",
     "pg": "^8.5.1",

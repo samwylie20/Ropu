@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { supabase } from './supabaseClient'
+import Auth from './Auth'
+import Account from './Account'
 
-
-function App () {
-
+function App() {
   return (
     <>
       <div className='app'>
