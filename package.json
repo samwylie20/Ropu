@@ -38,7 +38,13 @@
     ]
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.1.7",
+    "@chakra-ui/react": "^1.8.5",
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@heroicons/react": "^1.0.5",
     "express": "^4.17.1",
+    "framer-motion": "^6.2.8",
     "knex": "^0.21.12",
     "pg": "^8.5.1",
     "superagent": "^6.1.0"
