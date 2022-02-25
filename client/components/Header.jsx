@@ -5,51 +5,60 @@ import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon, TrendingUpIcon, 
 import Logo from './Logo'
 import NewPost from './posts/newPost'
 
-function Header () {
+function Header ({session}) {
   return (
     <>
       <Box padding='16px'>
         <Flex direction='left' justify='space-around'>
           <HStack spacing='12'>
             <Box>
-              <Logo />
+              <Link to='/'><Logo /></Link>
             </Box>
             <HStack spacing='2' align='left'>
               <nav>
-                <Button background='none'>
-                  <TrendingUpIcon height='24px' />
-                  <Box marginLeft='2'>
-                    <Link to='/'>Top</Link>
-                  </Box>
-                </Button>
+                <Link to='/top'>
+                  <Button background='none'>
+                    <TrendingUpIcon height='24px' />
+                    <Box marginLeft='2'>
+                    Top
+                    </Box>
+                  </Button>
+                </Link>
               </nav>
               <nav>
-                <Button background='none'>
+                <Link to='/jobs'><Button background='none'>
                   <OfficeBuildingIcon height='24px'/>
                   <Box marginLeft='2'>
-                    <Link to='/jobs'>Jobs</Link>
+                    Jobs
                   </Box>
                 </Button>
+                </Link>
               </nav>
               <nav>
-                <Button background='none'>
+                <Link to='/code'><Button background='none'>
                   <CodeIcon height='24px'/>
                   <Box marginLeft='2'>
-                    <Link to='/code'>Code</Link>
+                    Code
                   </Box>
                 </Button>
+                </Link>
               </nav>
               <nav>
-                <Button background='none'>
+                <Link to='/events'><Button background='none'>
                   <CalendarIcon height='24px'/>
                   <Box marginLeft='2'>
-                    <Link to='/events'>Events</Link>
+                    Events
                   </Box>
                 </Button>
+                </Link>
               </nav>
             </HStack>
           </HStack>
-          <NewPost />
+          <HStack>
+            {!session ? <Link to='/login'><Button borderRadius='24'>Log in</Button></Link>
+              : <NewPost />
+            }
+          </HStack>
         </Flex>
       </Box>
     </>

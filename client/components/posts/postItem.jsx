@@ -17,7 +17,7 @@ export default function postItem ({ index, votes, title, author, type, authorCoh
         background: 'gray.50'
       }} onClick={handleUpVote}>
         <HStack>
-          <ArrowSmUpIcon marginTop='-1' height='32px' marginRight='1' />
+          <ArrowSmUpIcon height='32px' style={{ marginRight: '5px', marginTop: '-2px' }} />
           <Text fontSize='xl' fontWeight='bold'>{votes}</Text>
         </HStack>
       </Box>

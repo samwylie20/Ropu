@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { supabase } from '../../supabaseClient'
-import { Box, Text, Input, Button } from '@chakra-ui/react'
+import { Box, Text, Input, Button, Stack } from '@chakra-ui/react'
 
 export default function Auth () {
   const [loading, setLoading] = useState(false)
@@ -20,10 +20,9 @@ export default function Auth () {
   }
 
   return (
-    <Box>
-      <Box>
-        <Text fontSize='lg'>Login</Text>
-        <Text>
+    <Box spacing='6' marginTop='6'>
+      <Stack spacing='6'>
+        <Text fontSize='lg' fontWeight='bold'>
           Sign in via magic link with your email below
         </Text>
         <Box>
@@ -45,7 +44,7 @@ export default function Auth () {
             {loading ? <Text>Loading</Text> : <Text>Send magic link</Text>}
           </Button>
         </Box>
-      </Box>
+      </Stack>
     </Box>
   )
 }
