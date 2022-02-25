@@ -1,4 +1,4 @@
-import { Box, Button, FormLabel, Input } from '@chakra-ui/react'
+import { Box, Button, FormLabel, HStack, Input, Stack, Text } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
 import { supabase } from '../../supabaseClient'
 
@@ -67,7 +67,8 @@ export default function Account ({ session }) {
   }
 
   return (
-    <Box>
+    <Stack spacing='6'>
+      <Text fontSize='xl' fontWeight='bold'>Log in</Text>
       <Box>
         <FormLabel>Email</FormLabel>
         <Input id='email' type='text' value={session.user.email} disabled />
@@ -91,23 +92,25 @@ export default function Account ({ session }) {
         />
       </Box>
 
-      <Box>
-        <Button
-          onClick={() => updateProfile({ username, website, avatar_url })}
-          disabled={loading}
-        >
-          {loading ? 'Loading ...' : 'Update'}
-        </Button>
-      </Box>
+      <HStack spacing='4'>
+        <Box>
+          <Button
+            onClick={() => updateProfile({ username, website, avatar_url })}
+            disabled={loading}
+          >
+            {loading ? 'Loading ...' : 'Update'}
+          </Button>
+        </Box>
 
-      <Box>
-        <Button
-          className='button block'
-          onClick={() => supabase.auth.signOut()}
-        >
+        <Box>
+          <Button
+            className='button block'
+            onClick={() => supabase.auth.signOut()}
+          >
           Sign Out
-        </Button>
-      </Box>
-    </Box>
+          </Button>
+        </Box>
+      </HStack >
+    </Stack>
   )
 }

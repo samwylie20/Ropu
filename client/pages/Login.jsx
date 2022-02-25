@@ -5,8 +5,8 @@ import { Container } from '@chakra-ui/react'
 
 export default function Login ({ session, key }) {
   return (
-    <Container>
-      {!session ? <Auth /> : <Account key={session.user.id} session={session} />}
+    <Container marginTop='4'>
+      {!session ? <Auth /> : <Account key={key} session={session} />}
     </Container>
   )
 }
