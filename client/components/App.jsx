@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { supabase } from '../supabaseClient'
-import { Box, Container } from '@chakra-ui/react'
+import { Route, Routes } from 'react-router-dom'
 
 import Header from './Header'
-// import Home from '../pages/Home'
-import Auth from './Auth/Auth'
-import Account from './Auth/Account'
+import Login from '../pages/Login'
 
 function App () {
   const [session, setSession] = useState(null)
@@ -24,9 +22,9 @@ function App () {
       {/* <Auth />
       <Account /> */}
       {/* <Home /> */}
-      <Container>
-        {!session ? <Auth /> : <Account key={session.user.id} session={session} />}
-      </Container>
+      <Routes>
+        <Route path='/login' element={<Login key={session.user.id} session={session} />} />
+      </Routes>
     </>
 
   )
