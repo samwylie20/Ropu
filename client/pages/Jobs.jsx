@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box } from '@chakra-ui/react'
+import { Box, Stack } from '@chakra-ui/react'
 import Post from '../components/posts/postItem'
 import { supabase } from '../supabaseClient'
 
@@ -20,10 +20,12 @@ function Jobs () {
 
   return (
     <Box padding="24">
-      {data?.map((posts, index) => {
-        return <Post key={posts.id} index= {index} title={posts.post_title} content={posts.post_content} description={posts.post_description} />
-      })
-      }
+      <Stack spacing='12'>
+        {data?.map((posts, index) => {
+          return <Post key={posts.id} index= {index} title={posts.post_title} content={posts.post_content} description={posts.post_description} />
+        })
+        }
+      </Stack>
     </Box>
   )
 }
