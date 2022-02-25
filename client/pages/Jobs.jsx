@@ -1,23 +1,29 @@
-import React, { useState } from 'react'
-import Box from '@chakra-ui/react'
-
-import postItem from '../components/posts/postItem'
-import NewPost from '../components/posts/newPost'
-
-const fakePost = {
-  type: 'job',
-  author: 'Sam',
-  description: 'I have covid'
-}
-
-const fakePosts = [{}, {}]
-
-// The page should have the ability to make posts to external links (e.g. job posting on other websites) and/or the ability to post details about jobs
-// display each element of the object after being mapped
+import React, { useState, useEffect } from 'react'
+import { Box } from '@chakra-ui/react'
+import Post from '../components/posts/postItem'
+import { supabase } from '../supabaseClient'
 
 function Jobs () {
+  const [data, setData] = useState([])
+
+  useEffect(async () => {
+    const { data: posts, error } = await supabase
+      .from('posts')
+      .select('*')
+      .eq('post_type', 'job')
+    setData(posts)
+  }, [])
+
+  useEffect(() => {
+    console.log(data)
+  }, [data])
+
   return (
-    <Box>
+    <Box padding="24">
+      {data?.map((posts, index) => {
+        return <Post key={posts.id} index= {index} title={posts.post_title} content={posts.post_content} description={posts.post_description} />
+      })
+      }
     </Box>
   )
 }
