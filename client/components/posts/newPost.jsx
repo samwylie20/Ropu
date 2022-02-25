@@ -4,6 +4,7 @@ import React, {
 } from 'react'
 import { InputGroup, Switch, Textarea, InputLeftElement, Select, Button, Modal, ModalOverlay, ModalHeader, ModalContent, ModalCloseButton, FormControl, ModalBody, FormLabel, Input, ModalFooter, useDisclosure } from '@chakra-ui/react'
 import { LinkIcon } from '@chakra-ui/icons'
+import { supabase } from '../../supabaseClient'
 
 export default function NewPost () {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -15,8 +16,14 @@ export default function NewPost () {
   const [description, setDescription] = useState()
   const [privateToCohort, setPrivateToCohort] = useState(false)
 
-  function handleSubmit (e) {
-    console.log(type, title, link, description, privateToCohort)
+  async function handleSubmit (e) {
+    const { data, error } = await supabase
+      .from('posts')
+      .insert([
+        { post_title: title, post_type: type, post_url: link, post_description: description, post_private: privateToCohort }
+      ])
+    console.log(data, error)
+    onClose()
   }
 
   return (
