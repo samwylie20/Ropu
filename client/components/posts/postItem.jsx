@@ -3,7 +3,7 @@ import React from 'react'
 import { Box, Text, Stack, HStack, Link, LinkBox, LinkOverlay } from '@chakra-ui/react'
 import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon, CalendarIcon } from '@heroicons/react/solid'
 
-export default function postItem ({ index, votes, title, author, type, authorCohort, postCreated, commentsNum }) {
+export default function postItem ({ index, votes, title, author, type, authorCohort, postCreated, commentsNum, description, url }) {
   function handleUpVote (e) {
     console.log('Fired')
   }
@@ -33,6 +33,8 @@ export default function postItem ({ index, votes, title, author, type, authorCoh
             <LinkOverlay href='#posturl' target="_blank">
               <Text fontSize='lg' fontWeight='bold'>{title}</Text>
             </LinkOverlay>
+            <Text fontSize='md' fontWeight='normal' as='i'>{description}</Text>
+            <Text fontSize='sm'>{url}</Text>
             <Text fontSize='sm'>Posted by <Link href='#profilelink' fontWeight='bold' textColor='orange.500'>{author}</Link> from {authorCohort} on {postCreated} | <Link fontWeight='bold' textColor='orange.500' href='#comments'>{commentsNum} comments</Link></Text>
           </Stack>
         </HStack>

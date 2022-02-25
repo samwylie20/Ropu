@@ -22,7 +22,7 @@ function Jobs () {
     <Box padding="24">
       <Stack spacing='12'>
         {data?.map((posts, index) => {
-          return <Post key={posts.id} index= {index} title={posts.post_title} content={posts.post_content} description={posts.post_description} />
+          return <Post key={posts.id} index= {index} title={posts.post_title} content={posts.post_content} description={posts.post_description} commentsNum={posts.no_comments} url={posts.post_url} />
         })
         }
       </Stack>
