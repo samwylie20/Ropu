@@ -20,7 +20,7 @@ export default function NewPost () {
     const { data, error } = await supabase
       .from('posts')
       .insert([
-        { post_title: title, post_type: type, post_url: link, post_description: description, post_private: privateToCohort }
+        { post_title: title, post_type: type, post_url: link, post_description: description, post_private: privateToCohort, post_votes: 0 }
       ])
     console.log(data, error)
     onClose()
