@@ -5,6 +5,8 @@ import Header from './Header'
 import Home from '../pages/home'
 import Jobs from '../pages/Jobs'
 import Code from '../pages/Code'
+import Events from '../pages/Events'
+
 
 function App () {
   return (
@@ -14,6 +16,8 @@ function App () {
         <Route path='/' element={<Home />} />
         <Route path='/jobs' element={<Jobs />} />
         <Route path='/code' element={<Code />} />
+        <Route path='/events' element={<Events />} />
+
       </Routes>
 
     </>
