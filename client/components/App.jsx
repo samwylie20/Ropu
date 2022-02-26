@@ -31,7 +31,6 @@ function App () {
         <Route path='/jobs' element={<Jobs />} />
         <Route path='/code' element={<Code />} />
         <Route path='/events' element={<Events />} />
-        <Route path='/top' element={<Top /> } />
       </Routes>
     </>
   )
