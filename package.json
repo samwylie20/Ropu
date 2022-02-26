@@ -48,6 +48,7 @@
     "framer-motion": "^6.2.8",
     "knex": "^0.21.12",
     "pg": "^8.5.1",
+    "react-favicon": "^0.0.26",
     "superagent": "^6.1.0"
   },
   "devDependencies": {
