@@ -6,22 +6,26 @@ import { supabase } from '../../supabaseClient'
 
 // Add function to upvote a post that inserts post id and user id to upvotes table #36
 
-export default function postItem ({ index, votes, title, author, type, authorCohort, postCreated, commentsNum, description, url }) {
-  // const { onClose } = useDisclosure()
-  // const [upvote, setUpvote] = useState()
-  // const [data, setData] = useState([])
+export default function postItem ({ index, votes, title, author, type, authorCohort, postCreated, commentsNum, description, url, id }) {
   const [user, setUser] = useState()
-  const [post, setPost] = useState()
+
+  useEffect(() => {
+    const user = supabase.auth.user()
+    setUser(user)
+  }, [])
+
+  useEffect(() => {
+    console.log(user)
+  }, [user])
 
   async function handleUpVote (e) {
     const { data, error } = await supabase
       .from('upvotes')
       .insert([
-        { user_id: user, post_id: post }
+        { auth_id: user.id, post_id: id }
       ])
     console.log(data, error)
     setUser()
-    setPost()
   }
 
   return (
