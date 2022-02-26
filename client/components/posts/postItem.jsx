@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { Box, Text, Stack, HStack, Link, LinkBox, LinkOverlay } from '@chakra-ui/react'
+import { Box, Text, Stack, HStack, Link, LinkBox, LinkOverlay, usePrevious, useDisclosure } from '@chakra-ui/react'
 import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon, CalendarIcon } from '@heroicons/react/solid'
+import { supabase } from '../../supabaseClient'
+
+// Add function to upvote a post that inserts post id and user id to upvotes table #36
 
 export default function postItem ({ index, votes, title, author, type, authorCohort, postCreated, commentsNum, description, url }) {
-  function handleUpVote (e) {
-    console.log('Fired')
+  // const { onClose } = useDisclosure()
+  // const [upvote, setUpvote] = useState()
+  // const [data, setData] = useState([])
+  const [user, setUser] = useState()
+  const [post, setPost] = useState()
+
+  async function handleUpVote (e) {
+    const { data, error } = await supabase
+      .from('upvotes')
+      .insert([
+        { user_id: user, post_id: post }
+      ])
+    console.log(data, error)
+    setUser()
+    setPost()
   }
 
   return (
