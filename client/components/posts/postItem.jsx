@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 
-import { Box, Text, Stack, HStack, Link, LinkBox, LinkOverlay, usePrevious, useDisclosure } from '@chakra-ui/react'
+import { Box, Text, Stack, HStack, Link, LinkBox, LinkOverlay } from '@chakra-ui/react'
 import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon, CalendarIcon } from '@heroicons/react/solid'
 import { supabase } from '../../supabaseClient'
 
-// Add function to upvote a post that inserts post id and user id to upvotes table #36
+// For each post, get how many times it's been upvoted and display on upvote #52
 
 export default function postItem ({ index, votes, title, author, type, authorCohort, postCreated, commentsNum, description, url, id }) {
   const [user, setUser] = useState()
+  const [data, setData] = useState([])
 
   useEffect(() => {
     const user = supabase.auth.user()
@@ -18,6 +19,14 @@ export default function postItem ({ index, votes, title, author, type, authorCoh
     console.log(user)
   }, [user])
 
+  useEffect(async () => {
+    const { data: upvotes, error } = await supabase
+      .from('upvotes')
+      .select('*')
+      .eq('post_id', data.id)
+    setData(upvotes)
+  }, [])
+
   async function handleUpVote (e) {
     const { data, error } = await supabase
       .from('upvotes')
@@ -26,6 +35,12 @@ export default function postItem ({ index, votes, title, author, type, authorCoh
       ])
     console.log(data, error)
     setUser()
+  }
+
+  async function countVotes (e) {
+    data.filter((post) => {
+      return post.id
+    })
   }
 
   return (
