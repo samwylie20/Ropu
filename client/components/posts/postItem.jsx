@@ -33,7 +33,6 @@ export default function postItem ({ index, votes, title, author, type, authorCoh
       .insert([
         { auth_id: user.id, post_id: id }
       ])
-    console.log(data, error)
     setUser()
   }
 

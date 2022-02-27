@@ -14,10 +14,6 @@ function Jobs () {
     setData(posts)
   }, [])
 
-  useEffect(() => {
-    console.log(data)
-  }, [data])
-
   return (
     <Box padding="24">
       <Stack spacing='12'>
