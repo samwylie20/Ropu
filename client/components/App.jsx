@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { supabase } from '../supabaseClient'
 import { Route, Routes } from 'react-router-dom'
-
+import { Box, Divider } from '@chakra-ui/react'
 import Header from './Header'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
@@ -22,17 +22,19 @@ function App () {
   }, [])
 
   return (
-    <>
+    <Box>
       <Header session={session} />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login key={session?.user?.id} session={session} />} />
-        <Route path='/top' element={<Top />} />
-        <Route path='/jobs' element={<Jobs />} />
-        <Route path='/code' element={<Code />} />
-        <Route path='/events' element={<Events />} />
-      </Routes>
-    </>
+      <Box marginTop='20' paddingY='6' paddingX='12'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login key={session?.user?.id} session={session} />} />
+          <Route path='/top' element={<Top />} />
+          <Route path='/jobs' element={<Jobs />} />
+          <Route path='/code' element={<Code />} />
+          <Route path='/events' element={<Events />} />
+        </Routes>
+      </Box>
+    </Box>
   )
 }
 

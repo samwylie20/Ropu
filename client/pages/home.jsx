@@ -16,9 +16,8 @@ export default function Home () {
 
   return (
 
-    <Box padding='24'>
-      <Search></Search>
-      <Stack spacing='12'>
+    <Box>
+      <Stack spacing='6'>
         {
           data?.sort((postA, postB) => {
             return postB.post_votes - postA.post_votes
