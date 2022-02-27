@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Button, Flex, HStack } from '@chakra-ui/react'
 import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon } from '@heroicons/react/solid'
 import Logo from './Logo'
 import NewPost from './posts/newPost'
 
-function Header ({session}) {
+function Header ({ session }) {
   return (
     <>
       <Box padding='16px'>
@@ -56,7 +56,7 @@ function Header ({session}) {
           </HStack>
           <HStack>
             {!session ? <Link to='/login'><Button borderRadius='24'>Log in</Button></Link>
-              : <NewPost />
+              : <NewPost session={session} />
             }
           </HStack>
         </Flex>

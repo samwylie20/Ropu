@@ -14,17 +14,12 @@ export default function postItem ({ index, votes, title, author, type, authorCoh
     setUser(user)
   }, [])
 
-  useEffect(() => {
-    console.log(user)
-  }, [user])
-
   async function handleUpVote (e) {
     const { data, error } = await supabase
       .from('upvotes')
       .insert([
         { auth_id: user.id, post_id: id }
       ])
-    console.log(data, error)
     setUser()
   }
 

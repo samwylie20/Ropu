@@ -1,12 +1,13 @@
 import React, {
   useRef,
+  useEffect,
   useState
 } from 'react'
 import { InputGroup, Switch, Textarea, InputLeftElement, Select, Button, Modal, ModalOverlay, ModalHeader, ModalContent, ModalCloseButton, FormControl, ModalBody, FormLabel, Input, ModalFooter, useDisclosure } from '@chakra-ui/react'
 import { LinkIcon } from '@chakra-ui/icons'
 import { supabase } from '../../supabaseClient'
 
-export default function NewPost () {
+export default function NewPost ({ session }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = useRef()
   const finalRef = useRef()
@@ -20,9 +21,8 @@ export default function NewPost () {
     const { data, error } = await supabase
       .from('posts')
       .insert([
-        { post_title: title, post_type: type, post_url: link, post_description: description, post_private: privateToCohort, post_votes: 0 }
+        { post_title: title, post_type: type, post_url: link, post_description: description, post_private: privateToCohort, post_votes: 0, auth_id: session.user.id }
       ])
-    console.log(data, error)
     onClose()
   }
 
