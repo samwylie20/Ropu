@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Box, Stack } from '@chakra-ui/react'
 import Post from '../components/posts/postItem'
 import { supabase } from '../supabaseClient'
+import Search from '../components/Search/Search'
 
 export default function Home () {
   const [data, setData] = useState()
@@ -14,7 +15,9 @@ export default function Home () {
   }, [])
 
   return (
+
     <Box padding='24'>
+      <Search></Search>
       <Stack spacing='12'>
         {
           data?.sort((postA, postB) => {
