@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Box, Button, Flex, HStack } from '@chakra-ui/react'
-import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon } from '@heroicons/react/solid'
+import { supabase } from '../supabaseClient'
+import { Box, Button, Flex, HStack, Text } from '@chakra-ui/react'
+import { OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon } from '@heroicons/react/solid'
 import Logo from './Logo'
 import NewPost from './posts/newPost'
 import Search from './Search/Search'
@@ -57,11 +58,14 @@ function Header ({ session }) {
               </HStack>
             </HStack>
           </Box>
-          <HStack spacing='4'>
-            <Search/>
+          <HStack spacing='2'>
+            <Box paddingRight='4'>
+              <Search/>
+            </Box>
             {!session ? <Link to='/login'><Button borderRadius='24'>Log in</Button></Link>
               : <NewPost session={session} />
             }
+            {session && <Text fontWeight='semibold' as='button' onClick={() => supabase.auth.signOut()}>Sign Out</Text>}
           </HStack>
         </Flex>
       </Box>
