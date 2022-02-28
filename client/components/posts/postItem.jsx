@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from 'react'
 
-import { Box, Text, Stack, HStack, Link, LinkBox, LinkOverlay, usePrevious, useDisclosure } from '@chakra-ui/react'
+import { Box, Text, Stack, HStack, Link, LinkBox, LinkOverlay } from '@chakra-ui/react'
 import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon, CalendarIcon } from '@heroicons/react/solid'
 import { supabase } from '../../supabaseClient'
 
-// Add function to upvote a post that inserts post id and user id to upvotes table #36
-
-export default function postItem ({ index, votes, title, author, type, authorCohort, postCreated, commentsNum, description, url, id }) {
+export default function postItem ({ index, title, author, type, authorCohort, postCreated, commentsNum, description, url, id }) {
   const [user, setUser] = useState()
+  const [countVote, setCountVote] = useState()
 
   useEffect(() => {
     const user = supabase.auth.user()
     
     setUser(user)
+  }, [])
+
+  useEffect(async () => {
+    const { data, error, count } = await supabase
+      .from('upvotes')
+      .select('post_id', { count: 'exact' })
+      .eq('post_id', id)
+    setCountVote(count)
   }, [])
 
   async function handleUpVote (e) {
@@ -22,6 +29,14 @@ export default function postItem ({ index, votes, title, author, type, authorCoh
         { auth_id: user.id, post_id: id }
       ])
     setUser()
+
+    if (data) {
+      const { data, error, count } = await supabase
+        .from('upvotes')
+        .select('post_id', { count: 'exact' })
+        .eq('post_id', id)
+      setCountVote(count)
+    }
   }
 
   return (
@@ -34,7 +49,7 @@ export default function postItem ({ index, votes, title, author, type, authorCoh
       }} onClick={handleUpVote}>
         <HStack>
           <ArrowSmUpIcon height='32px' style={{ marginRight: '5px', marginTop: '-2px' }} />
-          <Text fontSize='xl' fontWeight='bold'>{votes}</Text>
+          <Text fontSize='xl' fontWeight='bold'>{countVote}</Text>
         </HStack>
       </Box>
       <LinkBox as='article' width='full' border='1px' borderColor='gray.200' padding='6' borderRadius='16'>
