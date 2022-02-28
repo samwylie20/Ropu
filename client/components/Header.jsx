@@ -47,15 +47,24 @@ function Header ({ session }) {
                   </Link>
                 </nav>
                 <nav>
-                  <Link to='/events'><Button background='none'>
-                    <CalendarIcon height='24px'/>
-                    <Box marginLeft='2'>
-                    Events
-                    </Box>
-                  </Button>
+                  <Link to='/events'>
+                    <Button background='none'>
+                      <CalendarIcon height='24px'/>
+                      <Box marginLeft='2'>
+                        Events
+                      </Box>
+                     </Button>
                   </Link>
                 </nav>
-              </HStack>
+                <nav>
+                <Link to='/account'><Button background='none'>
+                <UserIcon height='24px'/>
+                  <Box marginLeft='2'>
+                    Account
+                  </Box>
+                </Button>
+                </Link>
+                </nav>
             </HStack>
           </Box>
           <HStack spacing='2'>

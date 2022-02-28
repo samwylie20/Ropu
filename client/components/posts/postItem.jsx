@@ -11,6 +11,7 @@ export default function postItem ({ index, votes, title, author, type, authorCoh
 
   useEffect(() => {
     const user = supabase.auth.user()
+    
     setUser(user)
   }, [])
 

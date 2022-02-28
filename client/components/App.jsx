@@ -9,6 +9,7 @@ import Jobs from '../pages/Jobs'
 import Code from '../pages/Code'
 import Events from '../pages/Events'
 import Top from '../pages/Top'
+import Account from '../pages/Account'
 
 function App () {
   const [session, setSession] = useState(null)
@@ -22,19 +23,18 @@ function App () {
   }, [])
 
   return (
-    <Box>
+    <Box marginTop='20' paddingY='6' paddingX='12'>
       <Header session={session} />
-      <Box marginTop='20' paddingY='6' paddingX='12'>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login key={session?.user?.id} session={session} />} />
-          <Route path='/top' element={<Top />} />
-          <Route path='/jobs' element={<Jobs />} />
-          <Route path='/code' element={<Code />} />
-          <Route path='/events' element={<Events />} />
-\        </Routes>
-      </Box>
-    </Box>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login key={session?.user?.id} session={session} />} />
+        <Route path='/top' element={<Top />} />
+        <Route path='/jobs' element={<Jobs />} />
+        <Route path='/code' element={<Code />} />
+        <Route path='/events' element={<Events />} />
+        <Route path='/account' element={<Account  />}  />
+      </Routes>
+    </>
   )
 }
 
