@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { supabase } from '../supabaseClient'
 import { Route, Routes } from 'react-router-dom'
-
+import { Box, Divider } from '@chakra-ui/react'
 import Header from './Header'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
@@ -23,7 +23,7 @@ function App () {
   }, [])
 
   return (
-    <>
+    <Box marginTop='20' paddingY='6' paddingX='12'>
       <Header session={session} />
       <Routes>
         <Route path='/' element={<Home />} />
