@@ -72,17 +72,6 @@ function Header ({ session }) {
                     </Button>
                   </Link>
                 </nav>
-<<<<<<< HEAD
-                <nav>
-                <Link to='/account'><Button background='none'>
-                <UserIcon height='24px'/>
-                  <Box marginLeft='2'>
-                    Account
-                  </Box>
-                </Button>
-                </Link>
-                </nav>
-=======
                 {userCohort && <nav>
                   <Link to={`/cohort/${userCohort.cohort_id}`}><Button background='none'>
                     <UserGroupIcon height='24px'/>
@@ -92,8 +81,6 @@ function Header ({ session }) {
                   </Button>
                   </Link>
                 </nav>}
-
->>>>>>> b908a8e2a68c95ef8fd6c1989204f4998f7d1f4b
               </HStack>
             </HStack>
           </Box>
