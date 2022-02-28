@@ -67,20 +67,21 @@ export default function NewPost ({ session, userCohort }) {
               </FormControl>
 
             </FormControl>
-            <FormControl mt={4}>
-              <FormLabel>Link</FormLabel>
-              <InputGroup onChange={(e) => setLink(e.target.value)} value={link}>
-                <InputLeftElement
-                  pointerEvents='none'
-                  children={<LinkIcon color='gray.300' />}
-                />
-                <Input placeholder='Add link' />
-              </InputGroup>
+            {type !== 'code' &&
+              <FormControl mt={4}>
+                <FormLabel>Link</FormLabel>
+                <InputGroup onChange={(e) => setLink(e.target.value)} value={link}>
+                  <InputLeftElement
+                    pointerEvents='none'
+                    children={<LinkIcon color='gray.300' />}
+                  />
+                  <Input placeholder='Add link' />
+                </InputGroup>
+              </FormControl>
+            }
 
-            </FormControl>
-
             <FormControl mt={4}>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>{type !== 'code' ? <>Description</> : <>Code</>}</FormLabel>
               <Textarea onChange={(e) => setDescription(e.target.value)} value={description}/>
             </FormControl>
 
