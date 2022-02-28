@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
+
 import { Box, Button, Flex, HStack, IconButton } from '@chakra-ui/react'
 import { OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon, UserGroupIcon, UserIcon, LogoutIcon } from '@heroicons/react/solid'
 import Logo from './Logo'
@@ -71,6 +72,17 @@ function Header ({ session }) {
                     </Button>
                   </Link>
                 </nav>
+<<<<<<< HEAD
+                <nav>
+                <Link to='/account'><Button background='none'>
+                <UserIcon height='24px'/>
+                  <Box marginLeft='2'>
+                    Account
+                  </Box>
+                </Button>
+                </Link>
+                </nav>
+=======
                 {userCohort && <nav>
                   <Link to={`/cohort/${userCohort.cohort_id}`}><Button background='none'>
                     <UserGroupIcon height='24px'/>
@@ -81,6 +93,7 @@ function Header ({ session }) {
                   </Link>
                 </nav>}
 
+>>>>>>> b908a8e2a68c95ef8fd6c1989204f4998f7d1f4b
               </HStack>
             </HStack>
           </Box>
