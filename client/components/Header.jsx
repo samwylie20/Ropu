@@ -12,12 +12,14 @@ function Header ({ session }) {
   const [userCohort, setUserCohort] = useState()
 
   useEffect(async () => {
-    const { data, error } = await supabase
-      .from('users')
-      .select('*')
-      .eq('user_id', session?.user.id)
+    if (session) {
+      const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('user_id', session?.user.id)
 
-    setUserCohort(data[0])
+      setUserCohort(data[0])
+    }
   }, [session])
 
   useEffect(() => {
