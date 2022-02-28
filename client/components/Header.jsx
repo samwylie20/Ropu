@@ -6,7 +6,7 @@ import { Box, Button, Flex, HStack, IconButton } from '@chakra-ui/react'
 import { OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon, UserGroupIcon, UserIcon, LogoutIcon } from '@heroicons/react/solid'
 import Logo from './Logo'
 import NewPost from './posts/newPost'
-import Search from './Search/Search'
+import SearchBar from './Search/SearchBar'
 
 function Header ({ session }) {
   const [userCohort, setUserCohort] = useState()
@@ -88,7 +88,7 @@ function Header ({ session }) {
           </Box>
           <HStack spacing='2'>
             <Box paddingRight='4'>
-              <Search/>
+              <SearchBar/>
             </Box>
             {session && <nav>
               <Link to='/account'><Button background='none'>
