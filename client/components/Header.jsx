@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Button, Flex, HStack } from '@chakra-ui/react'
-import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon } from '@heroicons/react/solid'
+import { ArrowSmUpIcon, LinkIcon, UserIcon, OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon } from '@heroicons/react/solid'
 import Logo from './Logo'
 import NewPost from './posts/newPost'
 
@@ -48,6 +48,16 @@ function Header ({ session }) {
                   <CalendarIcon height='24px'/>
                   <Box marginLeft='2'>
                     Events
+                  </Box>
+                </Button>
+                </Link>
+              </nav>
+              {/* TO BE MOVED AND STYLED */}
+              <nav>
+                <Link to='/account'><Button background='none'>
+                <UserIcon height='24px'/>
+                  <Box marginLeft='2'>
+                    Account
                   </Box>
                 </Button>
                 </Link>
