@@ -6,11 +6,19 @@ import { supabase } from '../../supabaseClient'
 
 export default function postItem ({ index, title, author, type, authorCohort, postCreated, commentsNum, description, url, id }) {
   const [user, setUser] = useState()
-  const [countVote, setCountVote] = useState(0)
+  const [countVote, setCountVote] = useState()
 
   useEffect(() => {
     const user = supabase.auth.user()
     setUser(user)
+  }, [])
+
+  useEffect(async () => {
+    const { data, error, count } = await supabase
+      .from('upvotes')
+      .select('post_id', { count: 'exact' })
+      .eq('post_id', id)
+    setCountVote(count)
   }, [])
 
   async function handleUpVote (e) {
