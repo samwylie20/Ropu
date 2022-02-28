@@ -34,7 +34,7 @@ function App () {
         <Route path='/events' element={<Events />} />
         <Route path='/account' element={<Account  />}  />
       </Routes>
-    </>
+    </Box>
   )
 }
 

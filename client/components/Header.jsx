@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
 import { Box, Button, Flex, HStack, Text } from '@chakra-ui/react'
-import { OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon } from '@heroicons/react/solid'
+import { OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon, UserIcon } from '@heroicons/react/solid'
 import Logo from './Logo'
 import NewPost from './posts/newPost'
 import Search from './Search/Search'
@@ -65,6 +65,7 @@ function Header ({ session }) {
                 </Button>
                 </Link>
                 </nav>
+              </HStack>
             </HStack>
           </Box>
           <HStack spacing='2'>

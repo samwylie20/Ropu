@@ -48,8 +48,8 @@ function Account() {
           <Flex justify='center'>
             <Heading padding='4'> Posts by user.name</Heading>
             </Flex>
-        {data?.map((post) => {
-          return <Post key={post.id} votes={post.post_votes} title={post.post_title} author='Ryan' authorCohort='Harakeke' type='link' postCreated={post.created_at} commentsNum={post.no_comments} />
+        {data?.map((post, index) => {
+          return <Post key={post.id} index={index+1} votes={post.post_votes} title={post.post_title} author={user?.email} authorCohort='Harakeke' type='link' postCreated={post.created_at} commentsNum={post.no_comments} />
         })
         }
       </Stack>
