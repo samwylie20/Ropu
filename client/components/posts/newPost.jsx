@@ -7,21 +7,30 @@ import { InputGroup, Switch, Textarea, InputLeftElement, Select, Button, Modal, 
 import { LinkIcon } from '@chakra-ui/icons'
 import { supabase } from '../../supabaseClient'
 
-export default function NewPost ({ session }) {
+export default function NewPost ({ session, userCohort }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = useRef()
   const finalRef = useRef()
   const [type, setType] = useState('link')
-  const [title, setTitle] = useState()
-  const [link, setLink] = useState()
-  const [description, setDescription] = useState()
+  const [title, setTitle] = useState('')
+  const [link, setLink] = useState('')
+  const [description, setDescription] = useState('')
   const [privateToCohort, setPrivateToCohort] = useState(false)
 
   async function handleSubmit (e) {
     const { data, error } = await supabase
       .from('posts')
       .insert([
-        { post_title: title, post_type: type, post_url: link, post_description: description, post_private: privateToCohort, post_votes: 0, auth_id: session.user.id }
+        {
+          post_title: title,
+          post_type: type,
+          post_url: link,
+          post_description: description,
+          post_private: privateToCohort,
+          post_votes: 0,
+          auth_id: session.user.id,
+          user_cohort: userCohort?.cohort_id
+        }
       ])
     onClose()
   }
@@ -29,7 +38,6 @@ export default function NewPost ({ session }) {
   return (
     <>
       <Button colorScheme='orange' borderRadius='24' onClick={onOpen}>New post</Button>
-
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
