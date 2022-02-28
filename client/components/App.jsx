@@ -9,6 +9,7 @@ import Jobs from '../pages/Jobs'
 import Code from '../pages/Code'
 import Events from '../pages/Events'
 import Top from '../pages/Top'
+import Cohort from '../pages/Cohort'
 
 function App () {
   const [session, setSession] = useState(null)
@@ -32,7 +33,10 @@ function App () {
           <Route path='/jobs' element={<Jobs />} />
           <Route path='/code' element={<Code />} />
           <Route path='/events' element={<Events />} />
-\        </Routes>
+          <Route path='cohort'>
+            <Route path=":id" element={<Cohort />} />
+          </Route>
+        </Routes>
       </Box>
     </Box>
   )

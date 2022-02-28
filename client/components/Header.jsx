@@ -1,13 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
-import { Box, Button, Flex, HStack, Text } from '@chakra-ui/react'
-import { OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon } from '@heroicons/react/solid'
+import { Box, Button, Flex, HStack, Text, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
+import { OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon, UserGroupIcon } from '@heroicons/react/solid'
 import Logo from './Logo'
 import NewPost from './posts/newPost'
 import Search from './Search/Search'
 
 function Header ({ session }) {
+  const [userCohort, setUserCohort] = useState()
+
+  useEffect(async () => {
+    const { data, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('user_id', session?.user.id)
+
+    setUserCohort(data[0])
+  }, [session])
+
+  useEffect(() => {
+    console.log(userCohort)
+  }, [userCohort])
+
   return (
     <>
       <Box backgroundColor='white' zIndex='sticky' position='fixed' top='0' width='full' shadow='sm'>
@@ -55,6 +70,15 @@ function Header ({ session }) {
                   </Button>
                   </Link>
                 </nav>
+                {userCohort && <nav>
+                  <Link to={`/cohort/${userCohort.cohort_id}`}><Button background='none'>
+                    <UserGroupIcon height='24px'/>
+                    <Box marginLeft='2'>
+                    My Cohort
+                    </Box>
+                  </Button>
+                  </Link>
+                </nav>}
               </HStack>
             </HStack>
           </Box>
