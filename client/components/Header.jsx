@@ -97,7 +97,7 @@ function Header ({ session }) {
               </Button>
               </Link>
             </nav> }
-            {!session ? <Link to='/login'><Button borderRadius='24'>Log in</Button></Link> : <NewPost session={session} />}
+            {!session ? <Link to='/login'><Button borderRadius='24'>Log in</Button></Link> : <NewPost session={session} userCohort={userCohort} />}
             {session && <IconButton width='10' background='none' onClick={() => supabase.auth.signOut()} icon={<LogoutIcon width='24px' style={{ color: 'gray.500' }}/> }/>}
           </HStack>
         </Flex>
