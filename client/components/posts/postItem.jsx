@@ -4,27 +4,13 @@ import { Box, Text, Stack, HStack, Link, LinkBox, LinkOverlay } from '@chakra-ui
 import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon, CalendarIcon } from '@heroicons/react/solid'
 import { supabase } from '../../supabaseClient'
 
-// For each post, get how many times it's been upvoted and display on upvote #52
-
-export default function postItem ({ index, votes, title, author, type, authorCohort, postCreated, commentsNum, description, url, id }) {
+export default function postItem ({ index, title, author, type, authorCohort, postCreated, commentsNum, description, url, id }) {
   const [user, setUser] = useState()
-  const [data, setData] = useState([])
+  const [countVote, setCountVote] = useState(0)
 
   useEffect(() => {
     const user = supabase.auth.user()
     setUser(user)
-  }, [])
-
-  useEffect(() => {
-    console.log(user)
-  }, [user])
-
-  useEffect(async () => {
-    const { data: upvotes, error } = await supabase
-      .from('upvotes')
-      .select('*')
-      .eq('post_id', data.id)
-    setData(upvotes)
   }, [])
 
   async function handleUpVote (e) {
@@ -34,12 +20,14 @@ export default function postItem ({ index, votes, title, author, type, authorCoh
         { auth_id: user.id, post_id: id }
       ])
     setUser()
-  }
 
-  async function countVotes (e) {
-    data.filter((post) => {
-      return post.id
-    })
+    if (data) {
+      const { data, error, count } = await supabase
+        .from('upvotes')
+        .select('post_id', { count: 'exact' })
+        .eq('post_id', id)
+      setCountVote(count)
+    }
   }
 
   return (
@@ -52,7 +40,7 @@ export default function postItem ({ index, votes, title, author, type, authorCoh
       }} onClick={handleUpVote}>
         <HStack>
           <ArrowSmUpIcon height='32px' style={{ marginRight: '5px', marginTop: '-2px' }} />
-          <Text fontSize='xl' fontWeight='bold'>{votes}</Text>
+          <Text fontSize='xl' fontWeight='bold'>{countVote}</Text>
         </HStack>
       </Box>
       <LinkBox as='article' width='full' border='1px' borderColor='gray.200' padding='6' borderRadius='16'>
