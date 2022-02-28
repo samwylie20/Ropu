@@ -29,7 +29,7 @@ export default function Search () {
           placeholder={'Search for anything'}
         />
 
-        <Button onClick={handleSubmit} >Search</Button>
+        <Button onClick={handleSubmit} paddingX='6'>Search</Button>
       </HStack>
 
     </>
