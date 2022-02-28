@@ -24,8 +24,9 @@ function App () {
   }, [])
 
   return (
-    <Box marginTop='20' paddingY='6' paddingX='12'>
+    <Box>
       <Header session={session} />
+      <Box marginTop='20' paddingY='6' paddingX='12'>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login key={session?.user?.id} session={session} />} />
@@ -33,14 +34,13 @@ function App () {
           <Route path='/jobs' element={<Jobs />} />
           <Route path='/code' element={<Code />} />
           <Route path='/events' element={<Events />} />
-           <Route path='/account' element={<Account  />}  />
+          <Route path='/account' element={<Account  />}  />
           <Route path='cohort'>
             <Route path=":id" element={<Cohort />} />
           </Route>
         </Routes>
       </Box>
     </Box>
-
   )
 }
 

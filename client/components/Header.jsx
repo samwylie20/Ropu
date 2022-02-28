@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
-import { Box, Button, Flex, HStack, Text, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
-import { OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon, UserGroupIcon } from '@heroicons/react/solid'
+import { Box, Button, Flex, HStack, IconButton } from '@chakra-ui/react'
+import { OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon, UserGroupIcon, UserIcon, LogoutIcon } from '@heroicons/react/solid'
 import Logo from './Logo'
 import NewPost from './posts/newPost'
 import Search from './Search/Search'
@@ -68,7 +68,7 @@ function Header ({ session }) {
                       <Box marginLeft='2'>
                         Events
                       </Box>
-                     </Button>
+                    </Button>
                   </Link>
                 </nav>
                 {userCohort && <nav>
@@ -80,25 +80,25 @@ function Header ({ session }) {
                   </Button>
                   </Link>
                 </nav>}
-                <nav>
-                <Link to='/account'><Button background='none'>
-                <UserIcon height='24px'/>
-                  <Box marginLeft='2'>
-                    Account
-                  </Box>
-                </Button>
-                </Link>
-                </nav>
+
+              </HStack>
             </HStack>
           </Box>
           <HStack spacing='2'>
             <Box paddingRight='4'>
               <Search/>
             </Box>
-            {!session ? <Link to='/login'><Button borderRadius='24'>Log in</Button></Link>
-              : <NewPost session={session} />
-            }
-            {session && <Text fontWeight='semibold' as='button' onClick={() => supabase.auth.signOut()}>Sign Out</Text>}
+            {session && <nav>
+              <Link to='/account'><Button background='none'>
+                <UserIcon height='24px' />
+                <Box marginLeft='2'>
+                  My Account
+                </Box>
+              </Button>
+              </Link>
+            </nav> }
+            {!session ? <Link to='/login'><Button borderRadius='24'>Log in</Button></Link> : <NewPost session={session} />}
+            {session && <IconButton width='10' background='none' onClick={() => supabase.auth.signOut()} icon={<LogoutIcon width='24px' style={{ color: 'gray.500' }}/> }/>}
           </HStack>
         </Flex>
       </Box>
