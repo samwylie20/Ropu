@@ -18,15 +18,15 @@ export default function Home () {
   }, [data])
 
   return (
-    <Stack spacing='6'>
-      {
-        data?.sort((postA, postB) => {
-          return postB.post_votes - postA.post_votes
-        })
-          .map((post, index) => {
-            return <Post key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} author='Ryan' authorCohort='Harakeke' type='link' postCreated={post.created_at} commentsNum={post.no_comments} id={post.id}/>
+      <Stack spacing='6'>
+        {
+          data?.sort((postA, postB) => {
+            return postB.post_votes - postA.post_votes
           })
-      }
-    </Stack>
+            .map((post, index) => {
+              return <Post key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} author='Ryan' authorCohort='Harakeke' type='link' postCreated={post.created_at} commentsNum={post.no_comments} />
+            })
+        }
+      </Stack>
   )
 }
