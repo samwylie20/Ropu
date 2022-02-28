@@ -9,6 +9,7 @@ import Jobs from '../pages/Jobs'
 import Code from '../pages/Code'
 import Events from '../pages/Events'
 import Top from '../pages/Top'
+import Search from '../pages/Search'
 import Cohort from '../pages/Cohort'
 import Account from '../pages/Account'
 
@@ -29,6 +30,7 @@ function App () {
       <Box marginTop='20' paddingY='6' paddingX='12'>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/search/:query' element={<Search />} />
           <Route path='/login' element={<Login key={session?.user?.id} session={session} />} />
           <Route path='/top' element={<Top />} />
           <Route path='/jobs' element={<Jobs />} />

@@ -6,18 +6,20 @@ import { Box, Button, Flex, HStack, IconButton } from '@chakra-ui/react'
 import { OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon, UserGroupIcon, UserIcon, LogoutIcon } from '@heroicons/react/solid'
 import Logo from './Logo'
 import NewPost from './posts/newPost'
-import Search from './Search/Search'
+import SearchBar from './Search/SearchBar'
 
 function Header ({ session }) {
   const [userCohort, setUserCohort] = useState()
 
   useEffect(async () => {
-    const { data, error } = await supabase
-      .from('users')
-      .select('*')
-      .eq('user_id', session?.user.id)
+    if (session) {
+      const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('user_id', session?.user.id)
 
-    setUserCohort(data[0])
+      setUserCohort(data[0])
+    }
   }, [session])
 
   useEffect(() => {
@@ -85,13 +87,13 @@ function Header ({ session }) {
             </HStack>
           </Box>
           <HStack spacing='2'>
-            <Box paddingRight='4'>
-              <Search/>
+            <Box>
+              <SearchBar/>
             </Box>
             {session && <nav>
               <Link to='/account'><Button background='none'>
                 <UserIcon height='24px' />
-                <Box marginLeft='2'>
+                <Box>
                   My Account
                 </Box>
               </Button>
