@@ -4,7 +4,7 @@ import { Box, Button, Flex, HStack } from '@chakra-ui/react'
 import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon, TrendingUpIcon, CalendarIcon } from '@heroicons/react/solid'
 import Logo from './Logo'
 import NewPost from './posts/newPost'
-import Search from './Search/Search'
+import SearchBar from './Search/SearchBar'
 
 function Header ({ session }) {
   return (
@@ -58,7 +58,7 @@ function Header ({ session }) {
             </HStack>
           </Box>
           <HStack spacing='4'>
-            <Search/>
+            <SearchBar/>
             {!session ? <Link to='/login'><Button borderRadius='24'>Log in</Button></Link>
               : <NewPost session={session} />
             }
