@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Stack } from '@chakra-ui/react'
+import { Box, Stack, Spinner } from '@chakra-ui/react'
 import Post from '../components/posts/postItem'
 import { supabase } from '../supabaseClient'
 
@@ -13,12 +13,20 @@ export default function Home () {
     setData(posts)
   }, [])
 
-  useEffect(() => {
-    console.log(data)
-  }, [data])
-
   return (
     <Stack spacing='6'>
+      { data! (() => {
+        return <Spinner onl
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='orange.500'
+          size='xl'
+        />
+        :
+      })
+
+      }
       {
         data?.sort((postA, postB) => {
           return postB.post_votes - postA.post_votes

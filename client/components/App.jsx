@@ -34,7 +34,7 @@ function App () {
           <Route path='/jobs' element={<Jobs />} />
           <Route path='/code' element={<Code />} />
           <Route path='/events' element={<Events />} />
-          <Route path='/account' element={<Account  />}  />
+          <Route path='/account' element={<Account />} />
           <Route path='cohort'>
             <Route path=":id" element={<Cohort />} />
           </Route>

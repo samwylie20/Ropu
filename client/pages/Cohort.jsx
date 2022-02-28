@@ -4,7 +4,7 @@ import { supabase } from '../supabaseClient'
 import { Stack } from '@chakra-ui/react'
 import Post from '../components/posts/postItem'
 
-export default function Cohort() {
+export default function Cohort () {
   const param = useParams()
   const [data, setData] = useState()
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Stack } from '@chakra-ui/react'
+import { Box, Stack, Spinner } from '@chakra-ui/react'
 import Post from '../components/posts/postItem'
 import { supabase } from '../supabaseClient'
 
@@ -13,6 +13,8 @@ function Code () {
       .eq('post_type', 'code')
     setData(posts)
   }, [])
+
+  // pass prop to the spinner, is loading: true or false
 
   return (
     <Stack spacing='6'>
