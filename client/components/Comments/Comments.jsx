@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { supabase } from '../supabaseClient'
 
 import CommentForm from './CommentForm'
 import Comment from './Comment'
 import {
-  getCommnts as getCommentsApi,
+  getComments as getCommentsApi,
   createComment as createCommentApi,
   updateComment as updateCommentApi,
   deleteComment as deleteCommentApi

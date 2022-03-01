@@ -30,7 +30,7 @@ const Comment = ({
   return (
     <div key={comment.id} className='comment'>
       <div className='comment-image-container'>
-        <img src='/logo192.png' height='30px' />
+        <img src='/ropu-logo.png' height='30px' />
       </div>
       <div className='comment-right-part'>
         <div className='comment-content'>
