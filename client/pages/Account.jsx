@@ -1,19 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { SimpleGrid, Stack, Editable, EditableInput, EditablePreview, Flex, ButtonGroup, IconButton, Box, Text, Link, LinkBox, LinkOverlay, Heading } from '@chakra-ui/react'
-import {
-  Stack,
-  Button,
-  Flex,
-  Box,
-  Heading,
-  List,
-  ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
-  Center, 
-  Spinner
-} from '@chakra-ui/react'
+import { Stack, Heading, Flex, Box, List, ListItem, Center, Spinner } from '@chakra-ui/react'
 
 import Post from '../components/posts/postItem'
 import { supabase } from '../supabaseClient'
@@ -53,6 +39,7 @@ function Account () {
   }, [])
   
   console.log(userData, 'User Data State')
+ 
   if (!data) {
     return (
       <Center height='100vh'>
@@ -68,22 +55,34 @@ function Account () {
     return (
       <Box padding='24'>
         <Flex justify='center'>
-          <EditProfile />
-          <List padding='4'>
-
-            <Heading padding='4'> Posts by user.name</Heading>
-            <ListItem>Email: {user?.email}</ListItem>
-            <ListItem>Member since: {user?.created_at}</ListItem>
-          </List>
+          {
+            userData?.map((user, i, arr) => {
+              if (arr.length - 1 === i) {
+                return <List>
+                  <Heading> {user?.user_name} </Heading>
+                 <ListItem>Cohort: {user?.cohort_id}</ListItem>
+                 <ListItem>Pronouns: {user?.pronouns}</ListItem>
+                 <ListItem>Location: {user?.location}</ListItem>
+                 <ListItem>Interests: {user?.interests}</ListItem>
+                  <ListItem>GitHub: {user?.github_link}</ListItem>
+                 <ListItem>LinkedIn {user?.linkedin_link}</ListItem>
+                    </List>
+                  }
+                })}
+              <EditProfile />
           <Stack spacing='12'>
             <Flex justify='center'>
-              {userData?.map((user) => {
-                return <Heading> Posts by {user.user_name} </Heading> })}
+              {
+                userData?.map((user, i, arr) => {
+                  if (arr.length - 1 === i) {
+                    return <Heading> Posts by {user.user_name} </Heading>
+                  }
+                })}
             </Flex>
             {data?.map((post, index) => {
               return <Post key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} author={user?.email} authorCohort='Harakeke' type='link' postCreated={post.created_at} commentsNum={post.no_comments} id={post.id} />
             })
-            }
+          }
           </Stack>
         </Flex>
       </Box>
