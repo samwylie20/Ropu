@@ -21,6 +21,11 @@ export default function postItem ({ index, title, author, type, authorCohort, po
     setCountVote(count)
   }, [])
 
+  function formatDate (date) {
+    const newDate = new Date(date)
+    return (`${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()}`)
+  }
+
   async function handleUpVote (e) {
     const { data, error } = await supabase
       .from('upvotes')
@@ -65,7 +70,7 @@ export default function postItem ({ index, title, author, type, authorCohort, po
             </LinkOverlay>
             <Text fontSize='md' fontWeight='normal' as='i'>{description}</Text>
             <Text fontSize='sm'>{url}</Text>
-            <Text fontSize='sm'>Posted by <Link href='#profilelink' fontWeight='bold' textColor='orange.500'>{author}</Link> from {authorCohort} on {postCreated} | <Link fontWeight='bold' textColor='orange.500' href='#comments'>{commentsNum} comments</Link></Text>
+            <Text fontSize='sm'>Posted by <Link href='#profilelink' fontWeight='bold' textColor='orange.500'>{author}</Link> from {authorCohort} on {formatDate(postCreated)} | <Link fontWeight='bold' textColor='orange.500' href='#comments'>{commentsNum} comments</Link></Text>
           </Stack>
         </HStack>
       </LinkBox>
