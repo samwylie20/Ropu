@@ -17,9 +17,6 @@ import {
   Button,
   List,
   ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
   Center,
   Spinner
 } from '@chakra-ui/react'
@@ -67,7 +64,6 @@ function Account() {
     return (
       <Center height='100vh'>
         <Spinner
-          onl
           thickness='4px'
           speed='0.65s'
           emptyColor='gray.200'
