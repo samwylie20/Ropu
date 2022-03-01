@@ -12,6 +12,7 @@ import Top from '../pages/Top'
 import Search from '../pages/Search'
 import Cohort from '../pages/Cohort'
 import Account from '../pages/Account'
+import Post from '../pages/Post'
 
 function App () {
   const [session, setSession] = useState(null)
@@ -30,6 +31,7 @@ function App () {
       <Box marginTop='20' paddingY='6' paddingX='12'>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path="/post/:id" element={<Post />} />
           <Route path='/search/:query' element={<Search />} />
           <Route path='/login' element={<Login key={session?.user?.id} session={session} />} />
           <Route path='/top' element={<Top />} />
@@ -39,6 +41,7 @@ function App () {
           <Route path='/account' element={<Account />} />
           <Route path='cohort'>
             <Route path=":id" element={<Cohort />} />
+
           </Route>
         </Routes>
       </Box>
