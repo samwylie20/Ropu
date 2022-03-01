@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { supabase } from '../../supabaseClient'
 import { Box, Text, Input, Button, Stack } from '@chakra-ui/react'
 
-export default function Auth() {
+export default function Auth () {
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState('')
 
@@ -18,7 +18,7 @@ export default function Auth() {
       setLoading(false)
     }
   }
-  async function signInWithGoogle() {
+  async function signInWithGoogle () {
     const { user, session, error } = await supabase.auth.signIn({
       provider: 'google'
     })
@@ -49,7 +49,7 @@ export default function Auth() {
           </Button>
         </Box>
         <Box>
-          <Button onClick={(e) => signInWithGoogle()}>login with google</Button>
+          <Button onClick={(e) => signInWithGoogle()}>Login with Google</Button>
         </Box>
       </Stack>
     </Box>
