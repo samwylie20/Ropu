@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { SimpleGrid, Stack, Editable, EditableInput, EditablePreview, Flex, ButtonGroup, IconButton, Box, Text, Link, LinkBox, LinkOverlay, Heading } from '@chakra-ui/react'
 import {
+  Button,
   List,
   ListItem,
   ListIcon,
@@ -9,6 +10,7 @@ import {
 } from '@chakra-ui/react'
 import Post from '../components/posts/postItem'
 import { supabase } from '../supabaseClient'
+import EditProfile from '../components/profile/editProfile'
 
 
 function Account() {
@@ -39,11 +41,8 @@ function Account() {
   return (
     <Box padding='24'>
       <Flex justify='center'>
-        <List padding='4'>
-          <Heading padding='2'>USER ACCOUNT</Heading>
-          <ListItem>Email: {user?.email}</ListItem>
-          <ListItem>Member since: {user?.created_at}</ListItem>
-            </List>
+     
+        <EditProfile />
         <Stack spacing='12'>
           <Flex justify='center'>
             <Heading padding='4'> Posts by user.name</Heading>
