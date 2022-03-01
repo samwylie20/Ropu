@@ -31,7 +31,7 @@ function Header({ session }) {
   }, [session])
 
   useEffect(() => {
-    console.log(userCohort)
+    //console.log(userCohort)
   }, [userCohort])
 
   return (

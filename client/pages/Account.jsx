@@ -31,6 +31,7 @@ import EditProfile from '../components/profile/editProfile'
 function Account() {
   const [data, setData] = useState([])
   const [user, setUser] = useState()
+  const [userData, setUserData] = useState()
 
   useEffect(async () => {
     const user = await supabase.auth.user()
@@ -47,10 +48,21 @@ function Account() {
         .eq('auth_id', user.id)
       // Need to get posts by user ID here
       setData(posts)
-      console.log(posts, 'sss')
+      console.log(posts, 'Post Data')
+
+      const { data: userInfo, err } = await supabase
+        .from('users')
+        .select('*')
+        .eq('user_id', user.id)
+      // Need to get posts by user ID here
+      console.log(user.id, 'ID Being passed to .eq')
+      setUserData(userInfo)
+      console.log(userInfo, 'User Data')
     }
   }, [])
-
+  
+  console.log(userData, 'User Data State')
+ 
   if (!data) {
     return (
       <Center height='100vh'>
@@ -68,32 +80,34 @@ function Account() {
     return (
       <Box padding='24'>
         <Flex justify='center'>
-          <EditProfile />
-          <List padding='4'>
-            <Heading padding='4'> Posts by user.name</Heading>
-            <ListItem>Email: {user?.email}</ListItem>
-            <ListItem>Member since: {user?.created_at}</ListItem>
-          </List>
+          {
+            userData?.map((user, i, arr) => {
+              if (arr.length - 1 === i) {
+                return <List>
+                  <Heading> {user?.user_name} </Heading>
+                 <ListItem>Cohort: {user?.cohort_id}</ListItem>
+                 <ListItem>Pronouns: {user?.pronouns}</ListItem>
+                 <ListItem>Location: {user?.location}</ListItem>
+                 <ListItem>Interests: {user?.interests}</ListItem>
+                  <ListItem>GitHub: {user?.github_link}</ListItem>
+                 <ListItem>LinkedIn {user?.linkedin_link}</ListItem>
+                    </List>
+                  }
+                })}
+              <EditProfile />
           <Stack spacing='12'>
             <Flex justify='center'>
-              <Heading padding='4'> Posts by user.name</Heading>
+              {
+                userData?.map((user, i, arr) => {
+                  if (arr.length - 1 === i) {
+                    return <Heading> Posts by {user.user_name} </Heading>
+                  }
+                })}
             </Flex>
             {data?.map((post, index) => {
-              return (
-                <Post
-                  key={post.id}
-                  index={index + 1}
-                  votes={post.post_votes}
-                  title={post.post_title}
-                  author={user?.email}
-                  authorCohort='Harakeke'
-                  type='link'
-                  postCreated={post.created_at}
-                  commentsNum={post.no_comments}
-                  id={post.id}
-                />
-              )
-            })}
+              return <Post key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} author={user?.email} authorCohort='Harakeke' type='link' postCreated={post.created_at} commentsNum={post.no_comments} id={post.id} />
+            })
+          }
           </Stack>
         </Flex>
       </Box>
