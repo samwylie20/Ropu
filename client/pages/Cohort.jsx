@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
 import { Stack, Center, Spinner, Box } from '@chakra-ui/react'
 import Account from '../pages/Account'
+import Post from '../components/posts/postItem'
 
 export default function Cohort ({ cohort }) {
   const param = useParams()
