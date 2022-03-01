@@ -1,8 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import { Stack, Flex, Box, Heading, List, ListItem, Center, Spinner } from '@chakra-ui/react'
+import { SimpleGrid, Stack, Editable, EditableInput, EditablePreview, Flex, ButtonGroup, IconButton, Box, Text, Link, LinkBox, LinkOverlay, Heading } from '@chakra-ui/react'
+import {
+  Stack,
+  Button,
+  Flex,
+  Box,
+  Heading,
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
+  Center, 
+  Spinner
+} from '@chakra-ui/react'
 
 import Post from '../components/posts/postItem'
 import { supabase } from '../supabaseClient'
+import EditProfile from '../components/profile/editProfile'
 
 function Account () {
   const [data, setData] = useState([])
@@ -53,8 +68,10 @@ function Account () {
     return (
       <Box padding='24'>
         <Flex justify='center'>
+          <EditProfile />
           <List padding='4'>
-          
+
+            <Heading padding='4'> Posts by user.name</Heading>
             <ListItem>Email: {user?.email}</ListItem>
             <ListItem>Member since: {user?.created_at}</ListItem>
           </List>
