@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
-import { Stack, Center, Spinner } from '@chakra-ui/react'
+import { Stack, Center, Spinner, Box } from '@chakra-ui/react'
 import Account from '../pages/Account'
 
 export default function Cohort ({ cohort }) {
@@ -45,10 +45,14 @@ export default function Cohort ({ cohort }) {
   } else {
     return (
       <Stack spacing='6'>
-        {users?.map((users) => {
-          return <Account key={users.id} name={users.user_name} />
+        {data?.map((post, index) => {
+          return <Post key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} author='Ryan' authorCohort='Harakeke' type='link' postCreated={post.created_at} commentsNum={post.no_comments} id={post.id} />
         })
         }
+        <Box>  {users?.map((users) => {
+          return <Account key={users.id} name={users.user_name} />
+        })
+        } Cohort Members </Box>
       </Stack>
     )
   }
