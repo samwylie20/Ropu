@@ -1,17 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { SimpleGrid, Stack, Editable, EditableInput, EditablePreview, Flex, ButtonGroup, IconButton, Box, Text, Link, LinkBox, LinkOverlay, Heading } from '@chakra-ui/react'
 import {
-  Stack,
-  Button,
-  Flex,
-  Box,
-  Heading,
-  List,
-  ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
-  Center, 
+  Stack, Flex, Box, Heading, List,
+  ListItem, Center,
   Spinner
 } from '@chakra-ui/react'
 
