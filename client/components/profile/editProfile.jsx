@@ -11,7 +11,7 @@ export default function EditProfile ({ session }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = useRef()
   const finalRef = useRef()
-  const [cohort, setCohort] = useState('link')
+  const [cohort, setCohort] = useState()
   const [name, setName] = useState('')
   const [pronouns, setPronouns] = useState('')
   const [location, setLocation] = useState('')
@@ -31,13 +31,13 @@ export default function EditProfile ({ session }) {
       .insert([
         {
           user_name: name,
-          cohort: cohort,
           pronouns: pronouns,
           location: location,
           github_link: github,
           linkedin_link: linkedIn,
           interests: interests,
-          user_id: user.id
+          user_id: user.id,
+          cohort_id: cohort
           // // user_cohort: userCohort?.cohort_id
         }
       ])
@@ -64,11 +64,11 @@ export default function EditProfile ({ session }) {
             <FormControl >
               <FormLabel>Cohort</FormLabel>
               <Select ref={initialRef} onChange={(e) => setCohort(e.target.value)} placeholder="Select your Cohort">
-                <option value='ha22'>Harakeke-22</option>
-                <option value='ka22'>Kahikatea-22</option>
-                <option value='ma22'>Mataī-22</option>
-                <option value='po22'>Pōhutukawa-22</option>
-                <option value='ho22'>Horoeka-22</option>
+                <option value='1'>Harakeke-22</option>
+                <option value='2'>Kahikatea-22</option>
+                <option value='3'>Mataī-22</option>
+                <option value='4'>Pōhutukawa-22</option>
+                <option value='5'>Horoeka-22</option>
               </Select>
               </FormControl>
 

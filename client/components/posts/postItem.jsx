@@ -1,10 +1,26 @@
 import React, { useEffect, useState } from 'react'
 
-import { Box, Text, Stack, HStack, Link, LinkBox, LinkOverlay } from '@chakra-ui/react'
-import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon, CalendarIcon } from '@heroicons/react/solid'
+import {
+  Box,
+  Text,
+  Stack,
+  HStack,
+  Link,
+  LinkBox,
+  LinkOverlay
+} from '@chakra-ui/react'
+import {
+  ArrowSmUpIcon,
+  LinkIcon,
+  OfficeBuildingIcon,
+  CodeIcon,
+  CalendarIcon
+} from '@heroicons/react/solid'
 import { supabase } from '../../supabaseClient'
 
 export default function postItem ({ session, index, title, author, votes, type, authorCohort, postCreated, commentsNum, description, url, id }) {
+
+  const [user, setUser] = useState()
   const [countVote, setCountVote] = useState()
 
   useEffect(async () => {
@@ -16,9 +32,11 @@ export default function postItem ({ session, index, title, author, votes, type, 
     setCountVote(count)
   }, [])
 
-  function formatDate (date) {
+  function formatDate(date) {
     const newDate = new Date(date)
-    return (`${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()}`)
+    return `${newDate.getDate()}/${
+      newDate.getMonth() + 1
+    }/${newDate.getFullYear()}`
   }
 
   async function handleUpVote () {
@@ -31,6 +49,7 @@ export default function postItem ({ session, index, title, author, votes, type, 
       .from('upvotes')
       .select('post_id', { count: 'exact' })
       .eq('post_id', id)
+
 
     setCountVote(count)
 
