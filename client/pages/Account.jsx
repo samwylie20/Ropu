@@ -1,11 +1,34 @@
 import React, { useState, useEffect } from 'react'
-import { Stack, Heading, Flex, Box, List, ListItem, Center, Spinner } from '@chakra-ui/react'
+import {
+  SimpleGrid,
+  Stack,
+  Editable,
+  EditableInput,
+  EditablePreview,
+  Flex,
+  ButtonGroup,
+  IconButton,
+  Box,
+  Text,
+  Link,
+  LinkBox,
+  LinkOverlay,
+  Heading,
+  Button,
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
+  Center,
+  Spinner
+} from '@chakra-ui/react'
 
 import Post from '../components/posts/postItem'
 import { supabase } from '../supabaseClient'
 import EditProfile from '../components/profile/editProfile'
 
-function Account () {
+function Account() {
   const [data, setData] = useState([])
   const [user, setUser] = useState()
   const [userData, setUserData] = useState()
@@ -43,14 +66,16 @@ function Account () {
   if (!data) {
     return (
       <Center height='100vh'>
-        <Spinner onl
+        <Spinner
+          onl
           thickness='4px'
           speed='0.65s'
           emptyColor='gray.200'
           color='orange.500'
           size='xl'
         />
-      </Center>)
+      </Center>
+    )
   } else {
     return (
       <Box padding='24'>
@@ -86,7 +111,6 @@ function Account () {
           </Stack>
         </Flex>
       </Box>
-
     )
   }
 }

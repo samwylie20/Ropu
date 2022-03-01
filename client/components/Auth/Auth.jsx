@@ -49,7 +49,7 @@ export default function Auth() {
           </Button>
         </Box>
         <Box>
-          <Button onClick={(e) => signInWithGoogle()}>login with google</Button>
+          <Button onClick={(e) => signInWithGoogle()}>Login with Google</Button>
         </Box>
       </Stack>
     </Box>
