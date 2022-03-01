@@ -7,7 +7,7 @@ import { InputGroup, Switch, Textarea, InputLeftElement, Select, Button, Modal, 
 import { LinkIcon } from '@chakra-ui/icons'
 import { supabase } from '../../supabaseClient'
 
-export default function EditProfile ({ session, userCohort }) {
+export default function EditProfile ({ session }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = useRef()
   const finalRef = useRef()
@@ -18,6 +18,12 @@ export default function EditProfile ({ session, userCohort }) {
   const [github, setGithub] = useState('')
   const [linkedIn, setLinkedIn] = useState('')
   const [interests, setInterests] = useState('')
+  const [user, setUser] = useState()
+
+  useEffect(() => {
+    const user = supabase.auth.user()
+    setUser(user)
+  }, [])
 
   async function handleSubmit (e) {
     const { data, error } = await supabase
@@ -30,8 +36,8 @@ export default function EditProfile ({ session, userCohort }) {
           location: location,
           github_link: github,
           linkedin_link: linkedIn,
-          interests: interests
-          // // auth_id: session.user.id,
+          interests: interests,
+          user_id: user.id
           // // user_cohort: userCohort?.cohort_id
         }
       ])
