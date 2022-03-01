@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Stack, Spinner, Center } from '@chakra-ui/react'
+import { Stack, Spinner, Center } from '@chakra-ui/react'
 import Post from '../components/posts/postItem'
 import { supabase } from '../supabaseClient'
 
-export default function Home () {
+export default function Home ({ session }) {
   const [data, setData] = useState()
 
   useEffect(async () => {
-    const { data: posts, error } = await supabase
+    const { data: posts } = await supabase
       .from('posts')
       .select('*')
+
     setData(posts)
   }, [])
 
   if (!data) {
     return (
       <Center height='100vh'>
-        <Spinner onl
+        <Spinner
           thickness='4px'
           speed='0.65s'
           emptyColor='gray.200'
@@ -32,7 +33,7 @@ export default function Home () {
             return postB.post_votes - postA.post_votes
           })
             .map((post, index) => {
-              return <Post key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} author='Ryan' authorCohort='Harakeke' type='link' postCreated={post.created_at} commentsNum={post.no_comments} id={post.id}/>
+              return <Post session={session} key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} author='Ryan' authorCohort='Harakeke' type='link' postCreated={post.created_at} commentsNum={post.no_comments} id={post.id}/>
             })
         }
       </Stack>

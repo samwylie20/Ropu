@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { SimpleGrid, Stack, Editable, EditableInput, EditablePreview, Flex, ButtonGroup, IconButton, Box, Text, Link, LinkBox, LinkOverlay, Heading } from '@chakra-ui/react'
 import {
   Stack,
-  Button,
   Flex,
   Box,
   Heading,
   List,
   ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
-  Center, 
+
+  Center,
   Spinner
 } from '@chakra-ui/react'
 
@@ -45,7 +41,7 @@ function Account () {
   if (!data) {
     return (
       <Center height='100vh'>
-        <Spinner onl
+        <Spinner
           thickness='4px'
           speed='0.65s'
           emptyColor='gray.200'

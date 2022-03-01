@@ -17,7 +17,7 @@ function Jobs () {
   if (!data) {
     return (
       <Center height='100vh'>
-        <Spinner onl
+        <Spinner
           thickness='4px'
           speed='0.65s'
           emptyColor='gray.200'
