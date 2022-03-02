@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
-import { Stack, Center, Spinner, Box } from '@chakra-ui/react'
+import { Stack, Center, Spinner, Heading, List, ListItem } from '@chakra-ui/react'
 import Account from '../pages/Account'
 import Post from '../components/posts/postItem'
 
 export default function Cohort ({ cohort, session }) {
   const param = useParams()
   const [data, setData] = useState()
+  const [cohort, setCohort] = useState()
   const [users, setUsers] = useState()
 
   useEffect(() => {
@@ -16,11 +17,19 @@ export default function Cohort ({ cohort, session }) {
   }, [data])
 
   useEffect(async () => {
+    const { data: cohort, error } = await supabase
+      .from('users')
+      .select()
+      .eq('cohort_id', param.id)
+    setCohort(cohort)
+  }, [])
+
+  useEffect(async () => {
+    const { data, error } = await supabase
     const { data } = await supabase
       .from('posts')
       .select('*')
       .eq('user_cohort', param.id)
-
     setData(data)
   }, [])
 
@@ -50,10 +59,11 @@ export default function Cohort ({ cohort, session }) {
           return <Post id={post.id} session={session} key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} authorId={post.auth_id} type={post.post_type} url={post.post_url} postCreated={post.created_at} commentsNum={post.no_comments} />
         })
         }
-        <Box>  {users?.map((users) => {
-          return <Account key={users.id} name={users.user_name} />
-        })
-        } Cohort Members </Box>
+        <Heading> Cohort Members: </Heading>
+        {cohort?.map((name) => {
+          return <List> <ListItem>{name.user_name}</ListItem> </List>
+        }
+        )}
       </Stack>
     )
   }

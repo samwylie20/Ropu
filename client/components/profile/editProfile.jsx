@@ -31,6 +31,8 @@ export default function EditProfile ({ session }) {
       .insert([
         {
           user_name: name,
+          cohort_id: cohort,
+
           pronouns: pronouns,
           location: location,
           github_link: github,
@@ -57,19 +59,19 @@ export default function EditProfile ({ session }) {
       >
         <ModalOverlay />
         <ModalContent>
-            <ModalHeader>Your Information</ModalHeader>
+          <ModalHeader>Your Information</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl mt={4}>
-            <FormControl >
-              <FormLabel>Cohort</FormLabel>
-              <Select ref={initialRef} onChange={(e) => setCohort(e.target.value)} placeholder="Select your Cohort">
-                <option value='1'>Harakeke-22</option>
-                <option value='2'>Kahikatea-22</option>
-                <option value='3'>Mataī-22</option>
-                <option value='4'>Pōhutukawa-22</option>
-                <option value='5'>Horoeka-22</option>
-              </Select>
+              <FormControl >
+                <FormLabel>Cohort</FormLabel>
+                <Select ref={initialRef} onChange={(e) => setCohort(e.target.value)} placeholder="Select your Cohort">
+                  <option value='1'>Harakeke-22</option>
+                  <option value='2'>Kahikatea-22</option>
+                  <option value='3'>Mataī-22</option>
+                  <option value='4'>Pōhutukawa-22</option>
+                  <option value='5'>Horoeka-22</option>
+                </Select>
               </FormControl>
 
               <FormControl mt={4}>
@@ -82,30 +84,29 @@ export default function EditProfile ({ session }) {
                 <Input placeholder='They/them' onChange={(e) => setPronouns(e.target.value)} value={pronouns} />
               </FormControl>
 
-
               <FormControl mt={4}>
                 <FormLabel>Location</FormLabel>
                 <Input placeholder='Auckland...' onChange={(e) => setLocation(e.target.value)} value={location} />
               </FormControl>
               <FormControl mt={4}>
 
-              <FormLabel>GitHub</FormLabel>
-              <InputGroup onChange={(e) => setGithub(e.target.value)} value={github}>
-                <InputLeftElement
-                  pointerEvents='none'
-                  children={<LinkIcon color='gray.300' />}
-                />
-                <Input placeholder='Add link' />
-              </InputGroup>
+                <FormLabel>GitHub</FormLabel>
+                <InputGroup onChange={(e) => setGithub(e.target.value)} value={github}>
+                  <InputLeftElement
+                    pointerEvents='none'
+                    children={<LinkIcon color='gray.300' />}
+                  />
+                  <Input placeholder='Add link' />
+                </InputGroup>
 
-              <FormLabel>LinkedIn</FormLabel>
-              <InputGroup onChange={(e) => setLinkedIn(e.target.value)} value={linkedIn}>
-                <InputLeftElement
-                  pointerEvents='none'
-                  children={<LinkIcon color='gray.300' />}
-                />
-                <Input placeholder='Add link' />
-              </InputGroup>
+                <FormLabel>LinkedIn</FormLabel>
+                <InputGroup onChange={(e) => setLinkedIn(e.target.value)} value={linkedIn}>
+                  <InputLeftElement
+                    pointerEvents='none'
+                    children={<LinkIcon color='gray.300' />}
+                  />
+                  <Input placeholder='Add link' />
+                </InputGroup>
               </FormControl>
 
               <FormControl mt={4}>
@@ -113,7 +114,7 @@ export default function EditProfile ({ session }) {
                 <Input placeholder='Docker, React, Python, etc...' onChange={(e) => setInterests(e.target.value)} value={interests} />
               </FormControl>
 
-          </FormControl>
+            </FormControl>
 
           </ModalBody>
 

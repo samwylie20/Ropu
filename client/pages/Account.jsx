@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import {
-  SimpleGrid,
   Stack,
+  Flex, 
+  Heading, 
+  SimpleGrid,
   Editable,
   EditableInput,
   EditablePreview,
-  Flex,
   ButtonGroup,
   IconButton,
   Box,
@@ -13,7 +14,6 @@ import {
   Link,
   LinkBox,
   LinkOverlay,
-  Heading,
   Button,
   List,
   ListItem,
