@@ -5,7 +5,7 @@ import { Stack, Center, Spinner, Box } from '@chakra-ui/react'
 import Account from '../pages/Account'
 import Post from '../components/posts/postItem'
 
-export default function Cohort ({ cohort }) {
+export default function Cohort ({ cohort, session }) {
   const param = useParams()
   const [data, setData] = useState()
   const [users, setUsers] = useState()
@@ -16,7 +16,7 @@ export default function Cohort ({ cohort }) {
   }, [data])
 
   useEffect(async () => {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('posts')
       .select('*')
       .eq('user_cohort', param.id)
@@ -25,7 +25,7 @@ export default function Cohort ({ cohort }) {
   }, [])
 
   useEffect(async () => {
-    const { users, error } = await supabase
+    const { users } = await supabase
       .from('users')
       .select('*')
       .eq('cohort', cohort)
@@ -47,7 +47,7 @@ export default function Cohort ({ cohort }) {
     return (
       <Stack spacing='6'>
         {data?.map((post, index) => {
-          return <Post key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} author='Ryan' authorCohort='Harakeke' type='link' postCreated={post.created_at} commentsNum={post.no_comments} id={post.id} />
+          return <Post id={post.id} session={session} key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} authorId={post.auth_id} type={post.post_type} url={post.post_url} postCreated={post.created_at} commentsNum={post.no_comments} />
         })
         }
         <Box>  {users?.map((users) => {
