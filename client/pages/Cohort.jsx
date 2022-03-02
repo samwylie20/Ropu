@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
 import { Stack, Center, Spinner, Heading, List, ListItem } from '@chakra-ui/react'
-import Account from '../pages/Account'
 import Post from '../components/posts/postItem'
 
-export default function Cohort ({ cohort, session }) {
+export default function Cohort ({ session }) {
   const param = useParams()
   const [data, setData] = useState()
   const [cohort, setCohort] = useState()
-  const [users, setUsers] = useState()
 
   useEffect(() => {
     console.log(param)
@@ -24,21 +22,14 @@ export default function Cohort ({ cohort, session }) {
     setCohort(cohort)
   }, [])
 
+  console.log('this is cohort', cohort)
+
   useEffect(async () => {
     const { data, error } = await supabase
-    const { data } = await supabase
       .from('posts')
       .select('*')
       .eq('user_cohort', param.id)
     setData(data)
-  }, [])
-
-  useEffect(async () => {
-    const { users } = await supabase
-      .from('users')
-      .select('*')
-      .eq('cohort', cohort)
-    setUsers(users)
   }, [])
 
   if (!data) {
