@@ -18,6 +18,7 @@ import {
   Button,
   List,
   ListItem,
+  HStack,
   Center,
   Spinner
 } from '@chakra-ui/react'
@@ -73,28 +74,22 @@ function Account({ session }) {
     return (
       <Center>
         <Container maxW='container.xl' >
-          <Flex justify='center'>
+          <Flex justify='start' marginBottom='6'>
             {
               userData?.map((user, i, arr) => {
                 if (arr.length - 1 === i) {
-                  return <Stack spacing='2'>
-                    <Text>{user?.user_name}</Text>
-                    <EditProfile />
+                  return <HStack spacing='2'>
+                    <Text fontSize='lg' fontWeight='bold'>{user?.user_name}</Text>
+                    {/* <EditProfile /> */}
                     Cohort: {user?.cohort_id} | Pronouns: {user?.pronouns} | Location: {user?.location} | Interests: {user?.interests} | GitHub: {user?.github_link} | LinkedIn {user?.linkedin_link}
-                  </Stack>
+                  </HStack>
                 }
               })}
           </Flex>
           <Stack spacing='12'>
-            <Flex justify='center'>
-              {
-                userData?.map((user, i, arr) => {
-                  if (arr.length - 1 === i) {
-                    return <Text>Posts by {user.user_name}</Text>
-                  }
-                })}
-            </Flex>
-            {data?.map((post, index) => {
+            {data?.sort((postA, postB) => {
+              return postB.post_votes - postA.post_votes
+            }).map((post, index) => {
               return <Post id={post.id} session={session} key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} authorId={post.auth_id} type={post.post_type} url={post.post_url} postCreated={post.created_at} commentsNum={post.no_comments} />
             })
             }
