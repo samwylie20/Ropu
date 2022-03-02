@@ -15,7 +15,7 @@ export default function Cohort ({ session }) {
   }, [data])
 
   useEffect(async () => {
-    const { cohort, error } = await supabase
+    const { data: cohort, error } = await supabase
       .from('users')
       .select()
       .eq('cohort_id', param.id)
@@ -33,7 +33,7 @@ export default function Cohort ({ session }) {
   if (!data) {
     return (
       <Center height='100vh'>
-        <Spinner
+        <Spinner onl
           thickness='4px'
           speed='0.65s'
           emptyColor='gray.200'
