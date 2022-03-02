@@ -13,6 +13,10 @@ export default function Home ({ session }) {
     setData(posts)
   }, [])
 
+  useEffect(() => {
+    console.log(data)
+  }, [data])
+
   if (!data) {
     return (
       <Center height='100vh'>
@@ -28,8 +32,9 @@ export default function Home ({ session }) {
   } else {
     return (
       <Stack spacing='6'>
+
         {
-          data?.sort((postA, postB) => {
+          data.sort((postA, postB) => {
             return postB.post_votes - postA.post_votes
           })
             .map((post, index) => {
