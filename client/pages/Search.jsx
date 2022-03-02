@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Post from '../components/posts/postItem'
 import { supabase } from '../supabaseClient'
-import { Box, Stack, Center, Spinner } from '@chakra-ui/react'
+import { Box, Stack, Center, Spinner, Text } from '@chakra-ui/react'
 import { useParams } from 'react-router-dom'
 
 export default function Search () {
@@ -33,6 +33,12 @@ export default function Search () {
           size='xl'
         />
       </Center>)
+  } else if (data.length === 0) {
+    return (
+      <Center height='100vh'>
+        <Text fontWeight='bold' fontSize='lg'>No data</Text>
+      </Center>
+    )
   } else {
     return (
       <Box>
