@@ -48,19 +48,22 @@ export default function Cohort ({ session }) {
     return (
       <Center>
         <Container maxW='container.xl'>
-          <Box>
+          <Box marginBottom='6'>
             <Text fontWeight='bold'>Cohort Members:</Text>
-            <Text>
+            <HStack spacing='2'>
               {cohort?.map((name) => {
-                return (name.user_name)
+                return <Text key={name.user_name}>{name.user_name}</Text>
               })
               }
-            </Text>
+            </HStack>
           </Box>
           <Stack spacing='6'>
-            {data?.map((post, index) => {
-              return <Post id={post.id} session={session} key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} authorId={post.auth_id} type={post.post_type} url={post.post_url} postCreated={post.created_at} commentsNum={post.no_comments} />
+            {data?.sort((postA, postB) => {
+              return postB.post_votes - postA.post_votes
             })
+              .map((post, index) => {
+                return <Post id={post.id} session={session} key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} authorId={post.auth_id} type={post.post_type} url={post.post_url} postCreated={post.created_at} commentsNum={post.no_comments} />
+              })
             }
           </Stack>
         </Container>
