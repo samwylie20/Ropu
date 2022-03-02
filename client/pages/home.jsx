@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Stack, Spinner, Center } from '@chakra-ui/react'
+import { Stack, Spinner, Center, Text } from '@chakra-ui/react'
 import Post from '../components/posts/postItem'
 import { supabase } from '../supabaseClient'
 
@@ -13,10 +13,6 @@ export default function Home ({ session }) {
     setData(posts)
   }, [])
 
-  useEffect(() => {
-    console.log(data)
-  }, [data])
-
   if (!data) {
     return (
       <Center height='100vh'>
@@ -29,12 +25,17 @@ export default function Home ({ session }) {
         />
       </Center>
     )
+  } else if (data.length === 0) {
+    return (
+      <Center height='100vh'>
+        <Text fontWeight='bold' fontSize='lg'>No data</Text>
+      </Center>
+    )
   } else {
     return (
       <Stack spacing='6'>
-
         {
-          data.sort((postA, postB) => {
+          data?.sort((postA, postB) => {
             return postB.post_votes - postA.post_votes
           })
             .map((post, index) => {
