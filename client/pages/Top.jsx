@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Stack, Center, Spinner } from '@chakra-ui/react'
+import { Stack, Center, Spinner, Text } from '@chakra-ui/react'
 import Post from '../components/posts/postItem'
 import { supabase } from '../supabaseClient'
 
 function Top () {
-  const [data, setData] = useState([])
+  const [data, setData] = useState()
 
   useEffect(async () => {
     const { data: posts, error } = await supabase
@@ -29,6 +29,12 @@ function Top () {
           size='xl'
         />
       </Center>)
+  } else if (data.length === 0) {
+    return (
+      <Center height='100vh'>
+        <Text fontWeight='bold' fontSize='lg'>No data</Text>
+      </Center>
+    )
   } else {
     return (
       <Stack spacing='6'>
