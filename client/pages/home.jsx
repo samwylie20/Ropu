@@ -17,6 +17,8 @@ export default function Home ({ session }) {
     console.log(data)
   }, [data])
 
+  console.log('hi')
+
   if (!data) {
     return (
       <Center height='100vh'>

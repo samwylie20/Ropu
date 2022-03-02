@@ -9,7 +9,6 @@ export default function Cohort ({ session }) {
   const param = useParams()
   const [data, setData] = useState()
   const [cohort, setCohort] = useState()
-  const [users, setUsers] = useState()
 
   useEffect(() => {
     console.log(param)
@@ -24,20 +23,14 @@ export default function Cohort ({ session }) {
     setCohort(cohort)
   }, [])
 
+  console.log('this is cohort', cohort)
+
   useEffect(async () => {
     const { data: postsData } = await supabase
       .from('posts')
       .select('*')
       .eq('user_cohort', param.id)
     setData(postsData)
-  }, [])
-
-  useEffect(async () => {
-    const { users } = await supabase
-      .from('users')
-      .select('*')
-      .eq('cohort', cohort)
-    setUsers(users)
   }, [])
 
   if (!data) {
