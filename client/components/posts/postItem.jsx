@@ -69,7 +69,7 @@ export default function postItem ({ session, authorId, url, index, title, author
   }
 
   return (
-    <HStack spacing='6' width='full'>
+    <HStack spacing='6' width='full' >
       <Box>
         <Text fontSize='xl' fontWeight='bold'>{index}.</Text>
       </Box>
@@ -81,7 +81,7 @@ export default function postItem ({ session, authorId, url, index, title, author
           <Text fontSize='xl' fontWeight='bold'>{countVote && countVote}</Text>
         </HStack>
       </Box>
-      <LinkBox as='article' width='full' border='1px' borderColor='gray.200' padding='6' borderRadius='16'>
+      <LinkBox as='article' _hover={{ background: 'gray.50' }} width='full' border='1px' borderColor='gray.200' padding='6' borderRadius='16'>
         <HStack align='start' spacing='4'>
           <Box marginTop='1'>
             {type === 'link' && <LinkIcon height='24px' />}
