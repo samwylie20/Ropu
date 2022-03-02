@@ -6,7 +6,7 @@ export default function SearchBar () {
   const [searchParams, setSearchParams] = useState('')
   const navigate = useNavigate()
 
-  async function handleSubmit (event) {
+  async function handleSubmit () {
     navigate(`search/${searchParams}`)
     setSearchParams('')
   }
@@ -15,6 +15,7 @@ export default function SearchBar () {
     <>
       <HStack>
         <Input
+          value={searchParams}
           type={'text'}
           onChange={(e) => {
             setSearchParams(e.target.value)

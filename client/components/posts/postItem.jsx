@@ -1,46 +1,71 @@
 import React, { useEffect, useState } from 'react'
-
-import { Box, Text, Stack, HStack, Link, LinkBox, LinkOverlay } from '@chakra-ui/react'
-import { ArrowSmUpIcon, LinkIcon, OfficeBuildingIcon, CodeIcon, CalendarIcon } from '@heroicons/react/solid'
+import {
+  Box,
+  Text,
+  Stack,
+  HStack,
+  LinkBox,
+  LinkOverlay
+} from '@chakra-ui/react'
+import {
+  ArrowSmUpIcon,
+  LinkIcon,
+  OfficeBuildingIcon,
+  CodeIcon,
+  CalendarIcon
+} from '@heroicons/react/solid'
 import { supabase } from '../../supabaseClient'
+import { Link } from 'react-router-dom'
+import CommentsNumber from '../CommentsNumber'
 
-export default function postItem ({ index, title, author, type, authorCohort, postCreated, commentsNum, description, url, id }) {
-  const [user, setUser] = useState()
+export default function postItem ({ session, authorId, url, index, title, author, votes, type, authorCohort, postCreated, commentsNum, description, id }) {
   const [countVote, setCountVote] = useState()
-
-  useEffect(() => {
-    const user = supabase.auth.user()
-    setUser(user)
-  }, [])
+  const [user, setUser] = useState()
 
   useEffect(async () => {
-    const { data, error, count } = await supabase
+    const { data: user } = await supabase
+      .from('users')
+      .select('*')
+      .eq('user_id', authorId)
+    setUser(user[0])
+  }, [])
+
+  useEffect(() => {
+    console.log(user)
+  }, [user])
+
+  useEffect(async () => {
+    const { count } = await supabase
       .from('upvotes')
       .select('post_id', { count: 'exact' })
       .eq('post_id', id)
     setCountVote(count)
   }, [])
 
-  function formatDate (date) {
+  function formatDate(date) {
     const newDate = new Date(date)
-    return (`${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()}`)
+    return `${newDate.getDate()}/${
+      newDate.getMonth() + 1
+    }/${newDate.getFullYear()}`
   }
 
-  async function handleUpVote (e) {
-    const { data, error } = await supabase
+  async function handleUpVote () {
+    await supabase
       .from('upvotes')
-      .insert([
-        { auth_id: user.id, post_id: id }
-      ])
-    setUser()
+      .insert([{ post_id: id, auth_id: session.user.id }])
+      .eq('id', id)
 
-    if (data) {
-      const { data, error, count } = await supabase
-        .from('upvotes')
-        .select('post_id', { count: 'exact' })
-        .eq('post_id', id)
-      setCountVote(count)
-    }
+    const { count } = await supabase
+      .from('upvotes')
+      .select('post_id', { count: 'exact' })
+      .eq('post_id', id)
+
+    setCountVote(count)
+
+    await supabase
+      .from('posts')
+      .update({ post_votes: count })
+      .match({ id: id })
   }
 
   return (
@@ -50,10 +75,10 @@ export default function postItem ({ index, title, author, type, authorCohort, po
       </Box>
       <Box as='button' paddingX='4' paddingY='2' borderRadius='12' _hover={{
         background: 'gray.50'
-      }} onClick={handleUpVote}>
+      }} onClick={(e) => handleUpVote()}>
         <HStack>
           <ArrowSmUpIcon height='32px' style={{ marginRight: '5px', marginTop: '-2px' }} />
-          <Text fontSize='xl' fontWeight='bold'>{countVote}</Text>
+          <Text fontSize='xl' fontWeight='bold'>{countVote && countVote}</Text>
         </HStack>
       </Box>
       <LinkBox as='article' width='full' border='1px' borderColor='gray.200' padding='6' borderRadius='16'>
@@ -65,12 +90,12 @@ export default function postItem ({ index, title, author, type, authorCohort, po
             {type === 'events' && <CalendarIcon height='24px' />}
           </Box>
           <Stack>
-            <LinkOverlay href='#posturl' target="_blank">
+            <LinkOverlay href={url} target="_blank">
               <Text fontSize='lg' fontWeight='bold'>{title}</Text>
             </LinkOverlay>
             <Text fontSize='md' fontWeight='normal' as='i'>{description}</Text>
             <Text fontSize='sm'>{url}</Text>
-            <Text fontSize='sm'>Posted by <Link href='#profilelink' fontWeight='bold' textColor='orange.500'>{author}</Link> from {authorCohort} on {formatDate(postCreated)} | <Link fontWeight='bold' textColor='orange.500' href='#comments'>{commentsNum} comments</Link></Text>
+            <Text fontSize='sm'>Posted by {user?.user_name} on {formatDate(postCreated)} | <Link to={`post/${id}`} style={{ color: '#dd6b20', fontWeight: 'bold' }}><CommentsNumber postId={id} /> </Link></Text>
           </Stack>
         </HStack>
       </LinkBox>
