@@ -7,6 +7,7 @@ import {
   Editable,
   EditableInput,
   EditablePreview,
+  Container,
   ButtonGroup,
   IconButton,
   Box,
@@ -52,13 +53,9 @@ function Account({ session }) {
         .select('*')
         .eq('user_id', user.id)
       // Need to get posts by user ID here
-      console.log(user.id, 'ID Being passed to .eq')
       setUserData(userInfo)
-      console.log(userInfo, 'User Data')
     }
   }, [])
-
-  console.log(userData, 'User Data State')
 
   if (!data) {
     return (
@@ -74,29 +71,26 @@ function Account({ session }) {
     )
   } else {
     return (
-      <Box padding='24'>
-        <Flex justify='center'>
-          {
-            userData?.map((user, i, arr) => {
-              if (arr.length - 1 === i) {
-                return <List>
-                  <Heading> {user?.user_name} </Heading>
-                  <ListItem>Cohort: {user?.cohort_id}</ListItem>
-                  <ListItem>Pronouns: {user?.pronouns}</ListItem>
-                  <ListItem>Location: {user?.location}</ListItem>
-                  <ListItem>Interests: {user?.interests}</ListItem>
-                  <ListItem>GitHub: {user?.github_link}</ListItem>
-                  <ListItem>LinkedIn {user?.linkedin_link}</ListItem>
-                </List>
-              }
-            })}
-          <EditProfile />
+      <Center>
+        <Container maxW='container.xl' >
+          <Flex justify='center'>
+            {
+              userData?.map((user, i, arr) => {
+                if (arr.length - 1 === i) {
+                  return <Stack spacing='2'>
+                    <Text>{user?.user_name}</Text>
+                    <EditProfile />
+                    Cohort: {user?.cohort_id} | Pronouns: {user?.pronouns} | Location: {user?.location} | Interests: {user?.interests} | GitHub: {user?.github_link} | LinkedIn {user?.linkedin_link}
+                  </Stack>
+                }
+              })}
+          </Flex>
           <Stack spacing='12'>
             <Flex justify='center'>
               {
                 userData?.map((user, i, arr) => {
                   if (arr.length - 1 === i) {
-                    return <Heading> Posts by {user.user_name} </Heading>
+                    return <Text>Posts by {user.user_name}</Text>
                   }
                 })}
             </Flex>
@@ -105,8 +99,8 @@ function Account({ session }) {
             })
             }
           </Stack>
-        </Flex>
-      </Box>
+        </Container>
+      </Center>
     )
   }
 }
