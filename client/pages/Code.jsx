@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Stack, Spinner, Center, Text } from '@chakra-ui/react'
+import { Stack, Spinner, Center, Text, Container } from '@chakra-ui/react'
 import Post from '../components/posts/postItem'
 import { supabase } from '../supabaseClient'
 
-function Code () {
+function Code ({ session }) {
   const [data, setData] = useState()
 
   useEffect(async () => {
-    const { data: posts, error } = await supabase
+    const { data: posts } = await supabase
       .from('posts')
       .select('*')
       .eq('post_type', 'code')
@@ -33,12 +33,16 @@ function Code () {
     )
   } else {
     return (
-      <Stack spacing='6'>
-        {data?.map((post, index) => {
-          return <Post key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} author='Ryan' authorCohort='Harakeke' type='link' postCreated={post.created_at} commentsNum={post.no_comments} id={post.id} />
-        })
-        }
-      </Stack>
+      <Center>
+        <Container maxW='container.lg'>
+          <Stack spacing='6'>
+            {data?.map((post, index) => {
+              return <Post id={post.id} session={session} key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} authorId={post.auth_id} type={post.post_type} url={post.post_url} postCreated={post.created_at} commentsNum={post.no_comments} />
+            })
+            }
+          </Stack>
+        </Container>
+      </Center>
     )
   }
 }

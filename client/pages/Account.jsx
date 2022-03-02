@@ -25,7 +25,7 @@ import Post from '../components/posts/postItem'
 import { supabase } from '../supabaseClient'
 import EditProfile from '../components/profile/editProfile'
 
-function Account() {
+function Account({ session }) {
   const [data, setData] = useState([])
   const [user, setUser] = useState()
   const [userData, setUserData] = useState()
@@ -39,7 +39,7 @@ function Account() {
 
       setUser(user)
 
-      const { data: posts, error } = await supabase
+      const { data: posts } = await supabase
         .from('posts')
         .select()
         .eq('auth_id', user.id)
@@ -47,7 +47,7 @@ function Account() {
       setData(posts)
       console.log(posts, 'Post Data')
 
-      const { data: userInfo, err } = await supabase
+      const { data: userInfo } = await supabase
         .from('users')
         .select('*')
         .eq('user_id', user.id)
@@ -57,9 +57,9 @@ function Account() {
       console.log(userInfo, 'User Data')
     }
   }, [])
-  
+
   console.log(userData, 'User Data State')
- 
+
   if (!data) {
     return (
       <Center height='100vh'>
@@ -81,16 +81,16 @@ function Account() {
               if (arr.length - 1 === i) {
                 return <List>
                   <Heading> {user?.user_name} </Heading>
-                 <ListItem>Cohort: {user?.cohort_id}</ListItem>
-                 <ListItem>Pronouns: {user?.pronouns}</ListItem>
-                 <ListItem>Location: {user?.location}</ListItem>
-                 <ListItem>Interests: {user?.interests}</ListItem>
+                  <ListItem>Cohort: {user?.cohort_id}</ListItem>
+                  <ListItem>Pronouns: {user?.pronouns}</ListItem>
+                  <ListItem>Location: {user?.location}</ListItem>
+                  <ListItem>Interests: {user?.interests}</ListItem>
                   <ListItem>GitHub: {user?.github_link}</ListItem>
-                 <ListItem>LinkedIn {user?.linkedin_link}</ListItem>
-                    </List>
-                  }
-                })}
-              <EditProfile />
+                  <ListItem>LinkedIn {user?.linkedin_link}</ListItem>
+                </List>
+              }
+            })}
+          <EditProfile />
           <Stack spacing='12'>
             <Flex justify='center'>
               {
@@ -101,9 +101,9 @@ function Account() {
                 })}
             </Flex>
             {data?.map((post, index) => {
-              return <Post key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} author={user?.email} authorCohort='Harakeke' type='link' postCreated={post.created_at} commentsNum={post.no_comments} id={post.id} />
+              return <Post id={post.id} session={session} key={post.id} index={index + 1} votes={post.post_votes} title={post.post_title} authorId={post.auth_id} type={post.post_type} url={post.post_url} postCreated={post.created_at} commentsNum={post.no_comments} />
             })
-          }
+            }
           </Stack>
         </Flex>
       </Box>
