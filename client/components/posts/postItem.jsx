@@ -19,7 +19,6 @@ import {
 import { supabase } from '../../supabaseClient'
 
 export default function postItem ({ session, index, title, author, votes, type, authorCohort, postCreated, commentsNum, description, url, id }) {
-
   const [user, setUser] = useState()
   const [countVote, setCountVote] = useState()
 
@@ -49,7 +48,6 @@ export default function postItem ({ session, index, title, author, votes, type, 
       .from('upvotes')
       .select('post_id', { count: 'exact' })
       .eq('post_id', id)
-
 
     setCountVote(count)
 
