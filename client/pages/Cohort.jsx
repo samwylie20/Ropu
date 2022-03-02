@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { supabase } from '../supabaseClient'
-import { Stack, Center, Spinner, Box, Heading, List, ListItem } from '@chakra-ui/react'
+import { Stack, Center, Spinner, Heading, List, ListItem } from '@chakra-ui/react'
 import Post from '../components/posts/postItem'
 
 export default function Cohort () {
