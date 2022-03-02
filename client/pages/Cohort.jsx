@@ -22,6 +22,8 @@ export default function Cohort ({ session }) {
     setCohort(cohort)
   }, [])
 
+  console.log('this is cohort', cohort)
+
   useEffect(async () => {
     const { data, error } = await supabase
       .from('posts')
@@ -33,7 +35,7 @@ export default function Cohort ({ session }) {
   if (!data) {
     return (
       <Center height='100vh'>
-        <Spinner onl
+        <Spinner
           thickness='4px'
           speed='0.65s'
           emptyColor='gray.200'
