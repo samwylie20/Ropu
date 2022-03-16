@@ -1,6 +1,6 @@
 # Rōpū
 
-Kia ora! Welcome to the Rõpū App.
+Kia ora! Welcome to the Rōpū App.
 
 To checkout this repository, follow the instructions below
 
