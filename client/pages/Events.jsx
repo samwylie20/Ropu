@@ -10,7 +10,7 @@ function Events ({ session }) {
     const { data: posts, error } = await supabase
       .from('posts')
       .select('*')
-      .eq('post_type', 'event')
+      .eq('post_type', 'events')
     setData(posts)
   }, [])
 
