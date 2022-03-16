@@ -15,10 +15,8 @@
     "test:watch": "jest --noStackTrace --watchAll",
     "dev": "run-p dev:client dev:server",
     "dev:client": "npm run webpack -- --watch",
-    "dev:server": "nodemon --watch server server/index.js",
-    "build": "run-p build:client build:server",
-    "build:client": "npm run webpack -- --mode production",
-    "build:server": "npm run knex -- migrate:latest",
+    "dev:server": "nodemon server",
+    "build": "npm run webpack",
     "lint": "eslint --ext .js,.jsx .",
     "webpack": "webpack --config ./client/webpack.config.js",
     "knex": "knex --knexfile ./server/db/knexfile.js"
