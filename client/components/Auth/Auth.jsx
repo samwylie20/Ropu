@@ -18,11 +18,11 @@ export default function Auth () {
       setLoading(false)
     }
   }
-  async function signInWithGoogle () {
-    const { user, session, error } = await supabase.auth.signIn({
-      provider: 'google'
-    })
-  }
+  // async function signInWithGoogle () {
+  //   const { user, session, error } = await supabase.auth.signIn({
+  //     provider: 'google'
+  //   })
+  // }
   return (
     <Box spacing='6' marginTop='6'>
       <Stack spacing='6'>
@@ -48,9 +48,9 @@ export default function Auth () {
             {loading ? <Text>Loading</Text> : <Text>Send magic link</Text>}
           </Button>
         </Box>
-        <Box>
+        {/* <Box>
           <Button onClick={(e) => signInWithGoogle()}>Login with Google</Button>
-        </Box>
+        </Box> */}
       </Stack>
     </Box>
   )
